@@ -1,0 +1,1 @@
+Esse projeto tem por objetivo aumentar o conhecimento e dar experiencia pratica em SpringBoot, AngularJs, JQuery e afins aos seus desenvolvedores.
