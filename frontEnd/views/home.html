@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,13 +27,8 @@
 
 </head>
 <body>
-	<div class="modal-header">
-		<a href="#default" class="logo">ALUGUEL DE MOTOS</a>
-  		<div class="header-right">
-    		<a class="active" href="#contatic">Add more</a> |
-    		<a href="#exit">Exit</a>
-  		</div>
-	</div>
+	<div ng-include="'header.html'"></div>
+
 	<div class="container">
 		<div class="row">
 			<a class="col-md-3"><img src="../honda-100cc.jpg" class="img-thumbnail mx-auto d-block" ></a>
