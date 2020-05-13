@@ -1,0 +1,13 @@
+
+.containerRegister {
+
+    width: 100%;
+    height: 100%;
+}
+
+form {
+    width: 60%;
+    height: 90%;
+    border-style: solid;
+    background-color: chartreuse;
+}
