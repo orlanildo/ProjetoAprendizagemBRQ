@@ -1,0 +1,36 @@
+.header {
+    overflow: hidden;
+    background-color: #933CCC;
+    padding: 20px 10px;
+}
+
+.container{
+    margin-top: 10px;
+    padding: 5px;
+    background-color: rgb(149, 172, 241);
+    border-radius: 20px;
+}
+
+.info{
+    padding-top: 20px;
+}
+
+.img-thumbnail{
+    width: 250px; 
+    margin-top: 40px;
+    padding: 10px;
+    margin: 25px;
+}
+
+.borda {
+    border: red solid 1px;
+}
+
+.borda-btn{
+    margin-left: 285px;
+}
+
+.btn{
+    width: 150px;
+    margin-bottom: 10px;
+}
