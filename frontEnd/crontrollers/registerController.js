@@ -1,3 +1,4 @@
+
 app.controller('registerController', function ($scope, $http) {
 
 
@@ -17,3 +18,4 @@ app.controller('registerController', function ($scope, $http) {
         console.log('cancel')
     }
 })
+
