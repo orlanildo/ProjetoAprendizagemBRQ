@@ -1,7 +1,5 @@
-.header {
-    overflow: hidden;
-    background-color: #933CCC;
-    padding: 20px 10px;
+body {
+    font-family: "Lucida Console", Courier, monospace;
 }
 
 .container{
@@ -16,21 +14,21 @@
 }
 
 .img-thumbnail{
-    width: 250px; 
+    width: 100%; 
+    height: auto;
+    max-height: 265px;
     margin-top: 40px;
     padding: 10px;
     margin: 25px;
 }
 
-.borda {
-    border: red solid 1px;
+.panel {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 30px;
 }
 
-.borda-btn{
-    margin-left: 285px;
-}
-
-.btn{
-    width: 150px;
-    margin-bottom: 10px;
+.panel:hover{
+    border: 1px solid rgb(149, 172, 241);
 }
