@@ -18,5 +18,3 @@ app.controller('registerController', function ($scope, $http) {
         console.log('cancel')
     }
 })
-=======
->>>>>>> origin/bruno

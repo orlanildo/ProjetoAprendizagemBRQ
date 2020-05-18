@@ -2,18 +2,25 @@
 app.controller('loginController', function ($scope, $http) {
     $scope.client = {}
 
-    //mandar o email e a senha via post no body para a api
-    console.log('Entrou mo controle de login')
-
-
-    $scope.goToRegister = function() {
-        // Redirecionar para a tela de cadastro
-        console.log('goToRegister')
-    }
+    console.log('Entrou no controle de login')
 
     $scope.goToHome = function() {
-        // Redirecionar para a tela de cadastro
+        console.log('goToHome')
+        window.location.href = "/home"
+    }
+
+    $scope.goToRegister = function() {
         console.log('goToRegister')
+        window.location.href = "/register"
+    }
+    
+    $scope.logar = function (){
+    	console.log($scope.client)
+    	$http.post("/login", $scope.client).then(function(response){
+    		console.log(response)
+    	}, function(response){
+    		console.log(response)
+    	})
     }
 
 })
