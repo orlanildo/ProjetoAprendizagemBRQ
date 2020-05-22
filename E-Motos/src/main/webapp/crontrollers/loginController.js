@@ -6,6 +6,7 @@ app.controller('loginController', function ($scope, $http) {
 
     $scope.goToHome = function() {
         console.log('goToHome')
+        
         window.location.href = "/home"
     }
 
@@ -16,13 +17,22 @@ app.controller('loginController', function ($scope, $http) {
     
     $scope.logar = function (){
     	console.log($scope.client)
+    	
     	$http.post("/login", $scope.client).then(function(response){
-    		console.log(response)
+    		//console.log(response)
+    		if(response.data != null){
+    			console.log(response.data)
+    			return response.data
+    			//window.location.href = "/home"
+    		}
     	}, function(response){
     		console.log(response)
     	})
+    
     }
 
+    
+    
 })
 
 
