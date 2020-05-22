@@ -22,7 +22,8 @@
 <body ng-app="app" ng-controller="registerController">
 <div class="container-fluid">
     <div class="containerRegister">
-        <form class="form-signin">
+    
+        <form class="form-signin" method="post">
             <h1 class="h3 mb-3 font-weight-normal text-center">Registre-se</h1>
             <!-- Address Informations-->    
             <label for="inputZipCode" class="sr-only">Cep</label>
