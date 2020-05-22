@@ -8,5 +8,4 @@ public interface UserRepository extends CrudRepository<User, String> {
 
 	User findById(int id);
 	
-	void deleteById(int id);
 }

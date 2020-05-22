@@ -64,14 +64,16 @@ public class UserController {
 	}
 	
 	@DeleteMapping(value = "deleteUser/{id}")
-	public String deleteUser (@PathVariable int id){
+	public String deleteUser(@PathVariable int id){
 		try {
-			//ur.deleteById(id);
-			//ur.deleteAll();
-			return "User id:" + id + " successfully deleted!";
+			User findedUser = ur.findById(id);
+			System.out.println(findedUser.getId());
+			ur.delete(findedUser);
+			return "Moto id:" + id + " successfully deleted!";
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
 		return null;
 	}
 	

@@ -65,9 +65,10 @@ public class MotoController {
 	}
 	
 	@DeleteMapping(value = "deleteMoto/{id}")
-	public String deleteMoto (@PathVariable String id){
+	public String deleteMoto (@PathVariable int id){
 		try {
-			mr.deleteById(id);
+			Moto findedMoto = mr.findById(id);
+			mr.delete(findedMoto);
 			return "Moto id:" + id + " successfully deleted!";
 		} catch (Exception e) {
 			// TODO: handle exception
