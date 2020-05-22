@@ -43,7 +43,7 @@ public class User implements Serializable {
 	
 	
 	// Gatters ans Setter
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	
