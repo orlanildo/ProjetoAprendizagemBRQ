@@ -10,6 +10,9 @@
 
 	<link rel="stylesheet" href="../../css/login.css">
 
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<!--Get your own code at fontawesome.com-->
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -40,8 +43,8 @@
 <body ng-app="app" ng-controller="loginController">
 
 	<form method="post" class="form-signin">
-		<h1 class="h3 mb-3 font-weight-normal">Projeto Aprendizagem BRQ</h1>
-
+		
+		<h1 class="mb-3 font-weight-normal text-center"><i class='fas fa-motorcycle' style='font-size:36px'></i> E-MOTOS</h1>
 		<br />
 		<label for="inputEmail" class="sr-only">Email address</label>
 		<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" 
@@ -62,7 +65,7 @@
 		<button class="btn btn-lg btn-primary btn-block" type="submit" 
 			ng-click="goToRegister()">Cadastrar-se</button>
 
-		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+		<p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
 		
 	</form>
 

@@ -1,5 +1,9 @@
 package com.brq.EMotos.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +23,29 @@ public class UserController {
 
 	@Autowired
 	private UserRepository ur;
+	
+	@PostMapping(value = "/login")
+    public User login(@RequestBody User user, HttpServletRequest request) {
+		
+        try {
+            User userFindedByEmail = ur.findByEmail(user.getEmail());
+            
+            if(userFindedByEmail == null) { 
+                return null;
+            }else if(user.getPassword().equals(userFindedByEmail.getPassword())){
+            	
+            	HttpSession session = request.getSession();
+                session.setAttribute("clientLoged", userFindedByEmail);
+                
+                System.out.println("Cheguei aqui? " + session);
+                return userFindedByEmail;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return null;
+    }
 	
 	@GetMapping("/showUser/{id}")
 	public User showUser(@PathVariable int id) {
