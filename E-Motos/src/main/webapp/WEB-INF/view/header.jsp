@@ -10,7 +10,8 @@
 <body>
 	<div class="header">
 		<div id="container">
-			<a href="#default" class="logo"><i class="fas fa-motorcycle"></i> E-MOTOS</a>
+			<span class="fas fa-motorcycle"></span>
+			<a href="#default" class="logo"> E-MOTOS</a>
 			<div class="header-right">
 				<a class="active" href="#contact">Contact</a>
 				<a href="#addmore">Add more</a>

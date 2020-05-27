@@ -42,16 +42,22 @@
 	
 	</head>
 
-	<body style="font-family: monospace;" >
-	
+	<body>
+		
+		<h2 style="padding-left: 10px;">Usuário Logado:</h2><br>
+		<h5 style="padding-left: 10px;"> 
+		E-mail: ${clientLoged.email}<br>
+		Nome: ${clientLoged.name}
+		</h5>
+
 		<!-- <div ng-include="'header.html'"></div> -->
 		<div class="header">
 			<div id="container">
 				<a href="#default" class="logo"><i class="fas fa-motorcycle"></i> E-MOTOS</a>
 				<div class="header-right">
-					<a class="active" href="#contact">Contact</a>
-					<a href="#addmore">Add more</a>
-					<a href="/login">Exit</a>
+					<a class="" href="#contact">Contact</a>
+					<a href="#" data-toggle="modal" data-target="#addMore">Add more</a>
+					<a href="sair">Exit</a>
 				</div>
 			</div>
 		</div>
@@ -64,7 +70,7 @@
 				<div class="col-md-4">
 					<span class="far fa-check-circle" style="font-size:40px; color: #91E88E;"></span>
 					<h3>Melhores motos</h3>
-					<p>NÃ³s estamos aqui para te oferecer as melhores motos do mercado.</p>
+					<p>Nós estamos aqui para te oferecer as melhores motos do mercado.</p>
 				</div>
 				<div class="col-md-4">
 					<span class="fas fa-headset" style="font-size:40px; color: black;"></span>
@@ -73,8 +79,8 @@
 				</div>
 				<div class="col-md-4">
 					<span class="far fa-money-bill-alt" style="font-size:40px; color: #91E88E;"></span>
-					<h3>Melhores preÃ§os</h3>
-					<p>Os preÃ§os mais acessÃ­veis para que vocÃª consiga garantir uma moto pro dia-a-dia.</p>
+					<h3>Melhores preços</h3>
+					<p>Os preços mais acessíveis para que você consiga garantir uma moto pro dia-a-dia.</p>
 				</div>
 			</div>
 			<br><br><br>
@@ -88,12 +94,12 @@
 				<div class="col-md-4">
 					<span class="fas fa-running" style="font-size:40px; color: black;"></span>
 					<h3>Agilidade</h3>
-					<p>Trabalhamos para que a entrega seja o mais rÃ¡pido possÃ­vel.</p>
+					<p>Trabalhamos para que a entrega seja o mais rápido possível.</p>
 				</div>
 				<div class="col-md-4">
 					<span class="far fa-handshake" style="font-size:40px; color: #428bca;"></span>
-					<h3>ConfianÃ§a</h3>
-					<p>ConfianÃ§a Ã© a base da nossa relaÃ§Ã£o com os clientes.</p>
+					<h3>Confiança</h3>
+					<p>Confiança é a base da nossa relação com os clientes.</p>
 				</div>
 			</div>
 		</div><hr>
@@ -109,12 +115,12 @@
 						</div><hr>
 						<div>
 							<p><b>Information:</b> HONDA - 2020, 110CC.</p>
-							<p><b>Details:</b> Pronta para usar e com a revisÃ£o em dia.</p>
+							<p><b>Details:</b> Pronta para usar e com a revisão em dia.</p>
 							<p><b>KM:</b> 5KM Rodados.</p>
 						</div><hr>
 						<div>
 							<button class="btn btn-primary ">Alugue</button>
-							<button id="alterarMoto" class="btn btn-primary ">Alterar</button>
+							<button id="alterarMoto" class="btn btn-primary " data-toggle="modal" data-target="#addMore">Alterar</button>
 							<button class="btn btn-primary ">Excluir</button>
 						</div>
 					</div>
@@ -133,7 +139,7 @@
 						<hr>
 						<div>
 							<button class="btn btn-primary ">Alugue</button>
-							<button id="alterarMoto" class="btn btn-primary ">Alterar</button>
+							<button id="alterarMoto" class="btn btn-primary " data-toggle="modal" data-target="#addMore">Alterar</button>
 							<button class="btn btn-primary ">Excluir</button>
 						</div>
 					</div>
@@ -147,13 +153,13 @@
 						<hr>
 						<div>
 							<p><b>Information:</b> HONDA - 2018, 150CC.</p>
-							<p><b>Details:</b> Pronta para usar e com a revisÃ£o em dia.</p>
+							<p><b>Details:</b> Pronta para usar e com a revisão em dia.</p>
 							<p><b>KM:</b> 20KM Rodados.</p>
 						</div>
 						<hr>
 						<div>
 							<button class="btn btn-primary ">Alugue</button>
-							<button id="alterarMoto" class="btn btn-primary ">Alterar</button>
+							<button id="alterarMoto" class="btn btn-primary " data-toggle="modal" data-target="#addMore">Alterar</button>
 							<button class="btn btn-primary ">Excluir</button>
 						</div>
 					</div>
@@ -192,6 +198,46 @@
 				</div>
 			</div>
 			<span class="text-center">&copy; 2020</span>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="addMore" role="dialog">
+			<div class="modal-dialog">
+			  	<!-- Modal content-->
+			  	<div class="modal-content">
+					<div class="modal-header">
+				  		<h4 class="modal-title">Adicionar motos</h4>
+				  		<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<label for="inputMarca" class="sr-only">Marca</label>
+						<input type="text" name="brand" id="" class="form-control"
+						placeholder="Marca" ng-model="">
+
+						<label for="inputMarca" class="sr-only">Nome</label>
+						<input type="text" name="name" id="" class="form-control"
+						placeholder="Name" ng-model="">
+
+						<label for="inputMarca" class="sr-only">Modelo</label>
+						<input type="text" name="model" id="" class="form-control"
+						placeholder="Modelo" ng-model="">
+
+						<label for="inputMarca" class="sr-only">Ano</label>
+						<input type="text" name="year" id="" class="form-control"
+						placeholder="Ano" ng-model="">
+
+						<label for="inputMarca" class="sr-only">Descrição</label>
+						<textarea placeholder="Descrição" type="text" name="description" id="" class="form-control"
+						placeholder="Descrição" ng-model=""></textarea>
+	
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-default" data-dismiss="modal">Salvar</button>
+				  		<button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+					</div>
+				</div>
+			  
+			</div>
 		</div>
 
 	</body>
