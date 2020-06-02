@@ -1,6 +1,7 @@
 package com.brq.EMotos.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +21,14 @@ public class MotoController {
 	@Autowired
 	private MotoRepository mr;
 	
+	@CrossOrigin
 	@GetMapping("/showMoto/{id}")
 	public Moto showMoto (@PathVariable int id) {
 		Moto showMoto = mr.findById(id);
 		return showMoto;
 	}
 	
+	@CrossOrigin
 	@GetMapping("/listMotos")
 	public Iterable<Moto> listMotos() {
 		try {
@@ -37,6 +40,7 @@ public class MotoController {
 		return null;
 	}
 	
+	@CrossOrigin
 	@PostMapping(value = "/createMoto")
 	public Moto createMoto (@RequestBody Moto moto){
 		try {
@@ -49,6 +53,7 @@ public class MotoController {
 		return null;
 	}
 	
+	@CrossOrigin
 	@PutMapping(value = "updateMoto/{id}")
 	public Moto updateMoto (@PathVariable int id, @RequestBody Moto moto){
 		try {
@@ -64,6 +69,7 @@ public class MotoController {
 		return null;
 	}
 	
+	@CrossOrigin
 	@DeleteMapping(value = "deleteMoto/{id}")
 	public String deleteMoto (@PathVariable int id){
 		try {

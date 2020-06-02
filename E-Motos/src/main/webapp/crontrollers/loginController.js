@@ -1,5 +1,5 @@
 
-app.controller('loginController', function ($scope, $http) {
+app.controller('loginController', function ($scope, $http, $location) {
     $scope.client = {}
 
     console.log('Entrou no controle de login')
@@ -22,12 +22,26 @@ app.controller('loginController', function ($scope, $http) {
     		if(response.data != null){
     			console.log(response.data)
     			window.location.href = "/home"
+    				//$location.path("/home")
     			//return response.data
     		}
     	}, function(response){
     		console.log(response)
     	})
     } 
+    
+    $scope.listMotos = function () {
+    	console.log("listMotos")
+    	$http.get('/moto/listMotos').then(function (res) {
+             console.log(res.data)
+             console.log(res.status)
+             $scope.moto.push(angular.copy(res.data))
+             
+             console.log($scope.moto)
+             return res.data
+         })
+    }
+    
 })
 
 
