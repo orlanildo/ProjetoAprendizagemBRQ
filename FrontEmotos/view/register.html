@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../css/register.css">
 
 <div>
     <div class="container-fluid">
@@ -5,28 +6,29 @@
 
             <form class="form-signin" method="post">
                 <h1 class="h3 mb-3 font-weight-normal text-center">Registre-se</h1>
+
                 <!-- Address Informations-->
                 <label for="inputZipCode" class="sr-only">Cep</label>
                 <input type="zipCode" id="inputZipCode" class="form-control" placeholder="CEP" autofocus
-                    ng-model="client.zipCode">
+                    ng-model="addressClient.zipCode">
                 <div class="input-group form-group">
                     <label for="inputStreet" class="sr-only">Rua</label>
                     <input type="street" id="inputStreet" class="form-control" placeholder="Rua" autofocus
-                        ng-model="client.street">
+                        ng-model="addressClient.street">
                     <label for="inputNumber" class="sr-only">Numero</label>
-                    <input id="inputNumber" class="form-control col-md-2" placeholder="N�" autofocus
-                        ng-model="client.number">
+                    <input id="inputNumber" class="form-control col-md-2" placeholder="Nº" autofocus
+                        ng-model="addressClient.number">
                 </div>
-                <label for="inputDistrict" class="sr-only">Bairro</label>
-                <input type="district" id="inputDistrict" class="form-control" placeholder="Bairro" autofocus
-                    ng-model="client.district">
+                <label for="inputNeighborhood" class="sr-only">Bairro</label>
+                <input type="neighborhood" id="inputNeighborhood" class="form-control" placeholder="Bairro" autofocus
+                    ng-model="addressClient.neighborhood">
                 <div class="input-group form-group">
                     <label for="inputCity" class="sr-only">Cidade</label>
                     <input type="city" id="inputCity" class="form-control" placeholder="Cidade" autofocus
-                        ng-model="client.city">
+                        ng-model="addressClient.city">
                     <label for="inputState" class="sr-only">Estado</label>
                     <select type="state" id="inputState" class="form-control col-md-4" placeholder="Estado" autofocus
-                        ng-model="client.state">
+                        ng-model="addressClient.state">
                         <option>Estado</option>
                         <option>SP</option>
                         <option>RJ</option>
@@ -46,7 +48,7 @@
                 <label for="inputPassword" class="sr-only">Senha</label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Senha"
                     ng-model="client.password">
-                <button class="btn btn-lg btn-primary" type="submit" ng-click="goToHome()">Salvar</button>
+                <button class="btn btn-lg btn-primary" type="submit" ng-click="saveClient()">Salvar</button>
                 <button class="btn btn-lg btn-primary" type="submit" ng-click="goToLogin()">Cancelar</button>
                 <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
             </form>

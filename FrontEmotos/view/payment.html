@@ -1,10 +1,13 @@
-<div>
-    <!-- Reader -->
-    <div ng-include="'header.html'"></div>
+<link rel="stylesheet" href="../css/payment.css">
 
-    <!-- TODAS AS INFORMA��ES DE ALUGUEL -->
-    <div class="container-info">
-        <!-- INFORMA��ES DO PEDIDO - MOTO E CLIENTE -->
+
+<div  ng-controller="paymentController">
+
+    <!-- TODAS AS INFORMAÇÕES DE ALUGUEL -->
+    <form>
+        <div class="container-info">
+
+        <!-- INFORMAÇÕES DO PEDIDO - MOTO E CLIENTE -->
         <div class="jumbotron" style="background-color: #fff;">
             <p style="font-size: 37px; color: #428bca; margin-top: -50px;">Informações do pedido</p>
 
@@ -13,139 +16,184 @@
                 <div class="card border-light mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="../img/honda-100cc.jpg" class="card-img" alt="...">
+                            <img src="{{moto.photoMoto}}" class="card-img" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Nome da moto</h5>
-                                <p class="card-text">Informações dela</p>
-                                <p class="card-text">Km</p>
-                                <p class="card-text">Valores</p>
+                                <h5 class="card-title">{{moto.name}}</h5>
+                                <p class="card-text">{{moto.description}}</p>
+                                <p class="card-text">{{moto.km}}Km Rodados</p>
+                                <p class="card-text">Preço por km: R${{moto.pricePerKm}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <br><br>
-            <div class="container-fluid">
-                <p style="font-size: 20px; color: #428bca;">Informações do usuário</p>
-                <div class="row ">
-                    <!-- Formul�rio para adicionar um endere�o -->
-                    <div class="col-sm-6">
-                        <div class="card border-light">
-                            <div class="card-body">
-                                <h5 class="card-title">Novo Endereço:</h5>
-                                <div class="row">
-                                    <div class="input-group form-group">
-                                        <input type="street" id="inputStreet" class="form-control col-md-9"
-                                            placeholder="Rua" ng-model="address.street">
-                                        <input type="text" id="inputNumber" class="form-control col-md-3 "
-                                            placeholder="Nº" ng-model="address.number">
-                                    </div>
-                                    <div class="input-group form-group" style="margin-top: -15px;">
-                                        <label for="inputZipCode" class="sr-only">CEP</label>
-                                        <input type="zipcode" id="inputZipCode" class="form-control col-md-4"
-                                            placeholder="CEP" ng-model="address.zipcode">
-                                        <label for="inputNeighborhood" class="sr-only">Bairro</label>
-                                        <input type="neighborhood" id="inputNeighborhood" class="form-control"
-                                            placeholder="Bairro" ng-model="address.neighborhood">
-                                    </div>
-                                    <div class="input-group form-group" style="margin-top: -15px;">
-                                        <label for="inputCity" class="sr-only">Cidade</label>
-                                        <input type="city" id="inputCity" class="form-control col-md-10"
-                                            placeholder="Cidade" ng-model="address.city">
-                                        <label for="inputState" class="sr-only">Estado</label>
-                                        <select type="state" id="inputState" class="form-control col-md-4 "
-                                            placeholder="Estado" ng-model="address.state">
-                                            <option>Estado</option>
-                                            <option>BH</option>
-                                            <option>PR</option>
-                                            <option>RJ</option>
-                                            <option>SP</option>
-                                        </select>
-                                    </div>
+        </div>
+        <!-- INFORMAÇÕES DO PEDIDO - MOTO E CLIENTE -->
+
+        <hr />
+
+        <!-- Container formulários -->
+        <div class="container-fluid">
+            <p style="font-size: 20px; color: #428bca;">Informações do usuário</p>
+
+            <!-- Endereço do usuário -->
+            <div class="col-md-6 ">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Endereço:</h5>
+                        {{user.addressUser.street}}, {{user.addressUser.number}}<br>
+                        {{user.addressUser.neighborhood}} - {{user.addressUser.city}} -
+                        {{user.addressUser.state}}<br>
+                        CEP: {{user.addressUser.zipCode}}<br>
+                        <hr>
+                        <input id="usarEndereco" name="usarEndereco" type="checkbox">
+                        <label for="usarEndereco">Usar este endereço</label>
+
+                        <input id="usarEndereco" name="usarEndereco" type="checkbox">
+                        <label for="usarEndereco">Usar este endereço</label>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM Endereço do usuário -->
+
+            <div class="row ">
+                <!-- Formulário para recebimento -->
+                <div class="col-sm-6">
+                    <div class="card border-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Novo Endereço para Recebimento:</h5>
+                            <div class="row">
+                                <div class="input-group form-group">
+                                    <input type="street" id="inputStreet" class="form-control col-md-9"
+                                        placeholder="Rua" ng-model="addressReceivement.street">
+                                    <input type="text" id="inputNumber" class="form-control col-md-3 " placeholder="Nº"
+                                        ng-model="addressReceivement.number">
+                                </div>
+                                <div class="input-group form-group" style="margin-top: -15px;">
+                                    <label for="inputZipCode" class="sr-only">CEP</label>
+                                    <input type="zipcode" id="inputZipCode" class="form-control col-md-4"
+                                        placeholder="CEP" ng-model="addressReceivement.zipcode">
+                                    <label for="inputNeighborhood" class="sr-only">Bairro</label>
+                                    <input type="neighborhood" id="inputNeighborhood" class="form-control"
+                                        placeholder="Bairro" ng-model="addressReceivement.neighborhood">
+                                </div>
+                                <div class="input-group form-group" style="margin-top: -15px;">
+                                    <label for="inputCity" class="sr-only">Cidade</label>
+                                    <input type="city" id="inputCity" class="form-control col-md-10"
+                                        placeholder="Cidade" ng-model="addressReceivement.city">
+                                    <label for="inputState" class="sr-only">Estado</label>
+                                    <select type="state" id="inputState" class="form-control col-md-4 "
+                                        placeholder="Estado" ng-model="addressReceivement.state">
+                                        <option>Estado</option>
+                                        <option>BH</option>
+                                        <option>PR</option>
+                                        <option>RJ</option>
+                                        <option>SP</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Fim Form novo endere�o -->
+                </div>
+                <!--Formulário para recebimento -->
 
-                    <!-- Endere�o do usu�rio -->
-                    <div class="col-md-6 ">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Endereço:</h5>
-                                Endereço JSON/Usuário<br>
-                                Endereço JSON/Usuário<br>
-                                Endereço JSON/Usuário<br>
-                                <hr>
-                                <input id="usarEndereco" name="usarEndereco" type="checkbox">
-                                <label for="usarEndereco">Usar este endereço</label>
+
+                <!-- Formulário para entrega -->
+                <div class="col-sm-6">
+                    <div class="card border-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Novo Endereço para retirada:</h5>
+                            <div class="row">
+                                <div class="input-group form-group">
+                                    <input type="street" id="inputStreetAddressRemoval" class="form-control col-md-9"
+                                        placeholder="Rua" ng-model="addressRemoval.street">
+                                    <input type="text" id="inputNumberAddressRemoval" class="form-control col-md-3 "
+                                        placeholder="Nº" ng-model="addressRemoval.number">
+                                </div>
+                                <div class="input-group form-group" style="margin-top: -15px;">
+                                    <label for="inputZipCode" class="sr-only">CEP</label>
+                                    <input type="zipcode" id="inputZipCodeAddressRemoval" class="form-control col-md-4"
+                                        placeholder="CEP" ng-model="addressRemoval.zipcode">
+                                    <label for="inputNeighborhood" class="sr-only">Bairro</label>
+                                    <input type="neighborhood" id="inputNeighborhoodAddressRemoval" class="form-control"
+                                        placeholder="Bairro" ng-model="addressRemoval.neighborhood">
+                                </div>
+                                <div class="input-group form-group" style="margin-top: -15px;">
+                                    <label for="inputCity" class="sr-only">Cidade</label>
+                                    <input type="city" id="inputCityAddressRemoval" class="form-control col-md-10"
+                                        placeholder="Cidade" ng-model="addressRemoval.city">
+                                    <label for="inputState" class="sr-only">Estado</label>
+                                    <select type="state" id="inputStateAddressRemoval" class="form-control col-md-4 "
+                                        placeholder="Estado" ng-model="addressRemoval.state">
+                                        <option>Estado</option>
+                                        <option>BH</option>
+                                        <option>PR</option>
+                                        <option>RJ</option>
+                                        <option>SP</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Fim do card endere�o -->
                 </div>
+                <!-- Formulário para entrega -->
             </div>
         </div>
-        <hr>
-        <!-- FIM DAS INFORMA��ES DO PEDIDO -->
+        <!-- Container formulários -->
 
-        <!-- FORMA DE PAGAMENTO E ENDERE�O -->
+        <hr />
+
+        <!-- FORMA DE PAGAMENTO -->
         <div class="jumbotron" style="background-color: white;">
             <p style="font-size: 37px; color: #428bca; margin-top: -50px;">Adicionar cartão</p>
+            <div class="form-group">
 
-
-            <form class="form-group">
-                <!-- Informa��es do cart�o -->
+                <!-- Informações do cartão -->
                 <div class="col-md-6-offset-2 container-pagamento">
                     <label for="inputCardHolder" class="sr-only">Nome do Títular</label>
                     <input type="text" id="inputCardHolder" class="form-control" placeholder="Nome do Títular"
-                        ng-model="card.cardHolder">
+                        ng-model="creditCard.cardHolder">
 
                     <label for="inputCpfHolder" class="sr-only">CPF</label>
                     <input type="cpf" id="inputCpfHolder" class="form-control" placeholder="CPF"
-                        ng-model="card.cpfHolder">
+                        ng-model="creditCard.cpfHolder">
 
                     <label for="inputCardNumber" class="sr-only">Número do Cartão</label>
                     <input type="cardNumber" id="inputCardNumber" class="form-control" placeholder="Número do cartão"
-                        ng-model="card.cardNumber">
+                        ng-model="creditCard.cardNumber">
 
                     <div class="input-group form-group">
 
                         <label for="inputCVV" class="sr-only">Código de Segurança</label>
                         <input type="cvv" id="inputCVV" class="form-control col-md-3" placeholder="CCV"
-                            ng-model="card.cvv">
+                            ng-model="creditCard.cvv">
                         <label for="inputDueDate" class="sr-only">Data de Vencimento</label>
                         <input type="dueDate" id="inputDueDate" class="form-control" placeholder="Vencimento"
-                            ng-model="card.dueDate">
+                            ng-model="creditCard.dueDate">
 
                         <label for="inputFlag" class="sr-only">Bandeira do cartão</label>
                         <select type="flag" id="inputFlag" class="form-control col-md-4 " placeholder="Bandeira"
-                            ng-model="card.flag">
+                            ng-model="creditCard.flag">
                             <option>MasterCard</option>
                             <option>Visa</option>
                             <option>Elo</option>
                             <option>Hipercard</option>
                         </select>
-
                     </div>
-
-                    <div class="btn-cartao">
-                        <button type="submit" ng-click="finish()" class="btn btn-primary">Finalizar Pedido</button>
-                        <button type="submit" ng-click="goToHome()" class="btn btn-primary"> Cancelar</button>
-                    </div>
-                    <hr>
                 </div>
-            </form>
+                <!-- FIM Informações do cartão -->
 
+            </div>
         </div>
-        <!-- FIM DA FORMA DE PAGAMENTO -->
+        <!-- FIM FORMA DE PAGAMENTO -->
+
+        <div class="btn-cartao">
+            <button type="submit" ng-click="finish()" class="btn btn-primary">Finalizar Pedido</button>
+            <button type="submit" ng-click="goToHome()" class="btn btn-primary"> Cancelar</button>
+        </div>
 
     </div>
-    <!-- TODAS AS INFORMA��ES DE ALUGUEL -->
-
-    <!-- RODAP� -->
-    <div ng-include="'footer.html'"></div>
-
+    </form>
 </div>

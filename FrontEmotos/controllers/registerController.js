@@ -1,21 +1,20 @@
 
 angular.module('app').controller('registerController', function ($scope, $http, $location) {
+    $scope.addressClient = {}
     $scope.client = {}
 
-    $scope.goToHome = function() {
-    	console.log($scope.client)
+    $scope.saveClient = function() {
+        $scope.client.addressUser = $scope.addressClient
         
-    	// $http.post("/createClient", $scope.client).then(function(response){
-    	// 	console.log(response)
-    	// }, function(response){
-    	// 	console.log(response)
-    	// })
-    	
-        $location.path("/view/home")
+    	$http.post("http://localhost:8080/user/createUser", $scope.client).then(function(response){
+    	 	console.log(response)
+             $location.path("/view/login")
+    	}, function(response){
+    	 	console.log(response)
+    	})
     }
 
     $scope.goToLogin = function() {
-        console.log('goToLogin')
         $location.path("/view/")
     }
 })

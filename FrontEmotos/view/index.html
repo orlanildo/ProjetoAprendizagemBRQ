@@ -23,15 +23,17 @@
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 	<link rel="sortcut icon" type="image/png" href="../img/moto-icon.png" />
 
+	<style>
+		.container{
+			width: 200%;
+			padding: 5px;
+			/* background-color: rgb(149, 172, 241); */
+			border-radius: 10px;
+		}
+	</style>
 	<!-- Import CSS -->
 	<link rel="stylesheet" href="../css/header.css">
 	<link rel="stylesheet" href="../css/footer.css">
-
-	<link rel="stylesheet" href="../css/home.css">
-	<link rel="stylesheet" href="../css/login.css">
-	<link rel="stylesheet" href="../css/register.css">
-    <link rel="stylesheet" href="../css/payment.css">
-
 
 	<!-- Import AngularJS -->
 	<script src="../angularjs/angular/angular.min.js"></script>
@@ -48,11 +50,55 @@
 
 <body ng-app="app">
 
-	<div ng-include="'header.html'"></div>
+	<!-- <div ng-include="'header.html'"></div> -->
+	<header >
+		<div class="header">
+			<div id="container">
+				<span class="fas fa-motorcycle"></span>
+				<a href="#default" class="logo"> E-MOTOS</a>
+				<div class="header-right">
+					<a class="active" href="#contact">Contact</a>
+					<a href="#addmore">Add more</a>
+					<a href="#exit">Exit</a>
+				</div>
+			</div>
+		</div>
+	</header>
 
-	<div ng-view></div>
+	<div class="container" ng-view></div>
 	
-	<div ng-include="'footer.html'"></div>
+	<!-- <div ng-include="'footer.html'"></div> -->
+	<footer>
+		<div class="footer">
+			<div id="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="footer-left">
+							<h3>SOBRE O E-MOTO:</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus dui id lacus
+								sagittis interdum.
+								Aliquam a faucibus nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+								posuere cubilia curae;
+								Quisque ipsum nulla, ultricies vitae aliquet ut, consectetur non nunc.. </p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="footer-right">
+							<ul>
+								<li>Alguma coisa 1</li>
+								<li>Alguma coisa 2</li>
+								<li>Alguma coisa 3</li>
+								<li>Alguma coisa 4</li>
+								<li>Alguma coisa 5</li>
+								<li>Alguma coisa 6</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<span class="text-center">&copy; 2020</span>
+		</div>
+	</footer>
 
 </body>
 

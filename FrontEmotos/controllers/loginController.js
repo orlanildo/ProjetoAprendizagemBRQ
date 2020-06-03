@@ -5,12 +5,13 @@ angular.module('app').controller('loginController',
 	//loginController.$inject = ['$rootScope', 'location', 'SETTINGS']
 
     $scope.client = {}
-    
+	$scope.usuarioLogado = {}
+	
     $scope.logar = function (){
 		console.log("logar")
     	$http.post("http://localhost:8080/user/login", $scope.client).then(function(response){
     		if(response.data != null){
-				$rootScope.user = response.data
+				$rootScope.user = response.data;
 
 				console.log($rootScope.user)
 

@@ -1,8 +1,12 @@
-<div ng-controller="homeController">
+<link rel="stylesheet" href="../css/home.css">
+
+
+<div class="jumbotron"> 
 	<!-- Nome e email do user da sessão  -->
 	<h5 style="padding-left: 10px;">
 		E-mail: ${clientLoged.email}<br> Nome: ${clientLoged.name}
 	</h5>
+	
 
 	<!-- Header -->
 	<!-- <div ng-include="'header.html'"></div> -->
@@ -30,7 +34,7 @@
 			<div class="col-md-4">
 				<span class="far fa-check-circle" style="font-size: 40px; color: #91E88E;"></span>
 				<h3>Melhores motos</h3>
-				<p>N�s estamos aqui para te oferecer as melhores motos do
+				<p>Nós estamos aqui para te oferecer as melhores motos do
 					mercado.</p>
 			</div>
 			<div class="col-md-4">
@@ -41,8 +45,8 @@
 			</div>
 			<div class="col-md-4">
 				<span class="far fa-money-bill-alt" style="font-size: 40px; color: #91E88E;"></span>
-				<h3>Melhores pre�os</h3>
-				<p>Os pre�os mais acess�veis para que voc� consiga garantir uma
+				<h3>Melhores preços</h3>
+				<p>Os preços mais acessíveis para que você consiga garantir uma
 					moto pro dia-a-dia.</p>
 			</div>
 		</div>
@@ -60,12 +64,12 @@
 			<div class="col-md-4">
 				<span class="fas fa-running" style="font-size: 40px; color: black;"></span>
 				<h3>Agilidade</h3>
-				<p>Trabalhamos para que a entrega seja o mais r�pido poss�vel.</p>
+				<p>Trabalhamos para que a entrega seja o mais rápido possível.</p>
 			</div>
 			<div class="col-md-4">
 				<span class="far fa-handshake" style="font-size: 40px; color: #428bca;"></span>
-				<h3>Confian�a</h3>
-				<p>Confian�a � a base da nossa rela��o com os clientes.</p>
+				<h3>Confiança</h3>
+				<p>Confiança é a base da nossa relação com os clientes.</p>
 			</div>
 		</div>
 	</div>
@@ -74,99 +78,32 @@
 
 	<!-- <button ng-click="listMotos()">ListMotos</button> -->
 
-	<div class="container-fluid text-center" style="background-color: white;">
-		<h1 style="font-size: 55px; color: #428bca;">Nossas op��es de
-			motos</h1>
+	<div class="container-fluid text-center info-motos" >
+		<h1 style="font-size: 55px; color: #428bca;">Nossas opções de motos</h1>
 		<div class="row">
-			<div class="col-md-4 ">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading ">
-						<a class="col-md-3"><img src="../img/honda-100cc.jpg" class="img-thumbnail mx-auto d-block"
-								style="border: 0; height: 208px;">
-						</a>
-					</div>
-					<hr>
-					<div>
-						<p>
-							<b>Information:</b> HONDA - 2020, 110CC.
-						</p>
-						<p>
-							<b>Details:</b> Pronta para usar e com a revis�o em dia.
-						</p>
-						<p>
-							<b>KM:</b> 5KM Rodados.
-							<!-- <b>KM:</b> {{moto[0].km}} -->
-						</p>
-					</div>
-					<hr>
-					<div>
-						<button type="submit" ng-click="goToPayment()" class="btn btn-primary ">Alugue</button>
-						<button id="alterarMoto" class="btn btn-primary " data-toggle="modal"
-							data-target="#addMore">Alterar</button>
-						<button class="btn btn-primary ">Excluir</button>
-					</div>
+			<div class="panel panel-default text-center col-sm-3" ng-repeat="moto in motos ">
+				<div class="panel-heading ">
+					<a class="col-md-2"><img src="{{moto.photoMoto}}" class="img-thumbnail mx-auto d-block" style="border: 0;">
+					</a>
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<a class="col-md-3"><img src="../img/YAMAHA.jpg" class="img-thumbnail mx-auto d-block"
-								style="border: 0;"></a>
-					</div>
-					<hr>
-					<div>
-						<p>
-							<b>Information:</b> YAMAHA - 2019, 150CC.
-						</p>
-						<p>
-							<b>Details:</b> Pronta para usar e com a revis�o em dia.
-						</p>
-						<p>
-							<b>KM:</b> 10KM Rodados.
-						</p>
-					</div>
-					<hr>
-					<div>
-						<button type="submit" ng-click="goToPayment()" class="btn btn-primary ">Alugue</button>
-						<button id="alterarMoto" class="btn btn-primary " data-toggle="modal"
-							data-target="#addMore">Alterar</button>
-						<button class="btn btn-primary ">Excluir</button>
-					</div>
+				<hr>
+				<div>
+					<p><b>Information:</b> {{moto.brand}} - {{moto.name}} - {{moto.model}} </p>
+					<p><b>Details:</b> {{moto.description}} </p>
+					<p><b>KM:</b> {{moto.km}}</p>
 				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<a class="col-md-3"><img src="../img/HondaCG.jpg" class="img-thumbnail mx-auto d-block"
-								style="border: 0;">
-						</a>
-					</div>
-					<hr>
-					<div>
-						<p>
-							<b>Information:</b> HONDA - 2018, 150CC.
-						</p>
-						<p>
-							<b>Details:</b> Pronta para usar e com a revis�o em dia.
-						</p>
-						<p>
-							<b>KM:</b> 20KM Rodados.
-						</p>
-					</div>
-					<hr>
-					<div>
-						<button type="submit" ng-click="goToPayment()" class="btn btn-primary ">Alugue</button>
-						<button id="alterarMoto" class="btn btn-primary " data-toggle="modal"
-							data-target="#addMore">Alterar</button>
-						<button class="btn btn-primary ">Excluir</button>
-					</div>
+				<hr>
+				<div>
+					<button type="submit" ng-click="goToPayment(moto)" class="btn btn-primary ">Alugue</button>
+					<button id="alterarMoto" class="btn btn-primary " data-toggle="modal"
+						data-target="#addMore">Alterar</button>
+					<button class="btn btn-primary ">Excluir</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<hr>
-
+	<button ng-click="sair()">Exit</button>
 	<!-- Rodapé -->
 	<!-- <div ng-include="'footer.html'"></div> -->
 
@@ -200,4 +137,4 @@
 		<span class="text-center">&copy; 2020</span>
 	</div> -->
 
-</div>
+</body>
