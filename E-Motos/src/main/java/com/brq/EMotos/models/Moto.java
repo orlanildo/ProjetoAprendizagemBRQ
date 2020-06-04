@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Moto implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,13 +38,17 @@ public class Moto implements Serializable {
 	private String description;
 	
 	private float pricePerKm;
-
+	
+	private String photoMoto;
+	
+	private String statusRent;
+	
 	
 	// Gatters ans Setter
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -128,5 +132,25 @@ public class Moto implements Serializable {
 	public void setPricePerKm(float pricePerKm) {
 		this.pricePerKm = pricePerKm;
 	}
+
+	public String getPhotoMoto() {
+		return photoMoto;
+	}
+
+	public void setPhotoMoto(String photoMoto) {
+		this.photoMoto = photoMoto;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getStatusRent() {
+		return statusRent;
+	}
+
+	public void setStatusRent(String statusRent) {
+		this.statusRent = statusRent;
+	}	
 	
 }

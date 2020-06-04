@@ -38,9 +38,11 @@ public class User implements Serializable {
 	
 	private String type;
 	
+	private String statusRentUser;
+	
 	@OneToOne
 	private Address addressUser;
-
+	
 	
 	// Gatters ans Setter
 	public int getId() {
@@ -125,6 +127,14 @@ public class User implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getStatusRentUser() {
+		return statusRentUser;
+	}
+
+	public void setStatusRentUser(String statusRentUser) {
+		this.statusRentUser = statusRentUser;
 	}
 		
 }

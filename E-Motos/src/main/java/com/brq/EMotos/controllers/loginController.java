@@ -15,6 +15,8 @@ import com.brq.EMotos.models.User;
 @RequestMapping("/")
 public class loginController {
 	
+	// Crontrole temporario, utilizado para servir as jsp
+	
 	@CrossOrigin
 	@RequestMapping(value = "login", method = RequestMethod.GET)
     public String login() {
@@ -24,10 +26,9 @@ public class loginController {
 	
 	@CrossOrigin
     @RequestMapping(value = "sair", method = RequestMethod.GET)
-    public String sair(HttpServletRequest request){
+    public void sair(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "login";
 	}
 	
 	@CrossOrigin
@@ -50,28 +51,5 @@ public class loginController {
         return "home";
     }
     
-	
-//	@PostMapping(value = "/login")
-//	public String login(@RequestBody User user, HttpSession session) {
-//		System.out.println("Chegou no login");
-//		
-//        //session.setAttribute("clientLoged", user);
-//        
-//        return "created session";
-//		
-//    }
-
-	/*
-	@RequestMapping(value = "/logar", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public String logar(@ResponseBody User user, String email, String password, HttpSession session, HttpServletRequest request) {
-		
-		System.out.println(email);
-		System.out.println(password);
-		System.out.println(session);
-		System.out.println(request);
-		
-		return "home";
-	}
-	*/
 
 }

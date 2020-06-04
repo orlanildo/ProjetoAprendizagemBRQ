@@ -19,7 +19,7 @@ import com.brq.EMotos.repository.MotoRepository;
 public class MotoController {
 
 	@Autowired
-	private MotoRepository mr;
+	private static MotoRepository mr;
 	
 	@CrossOrigin
 	@GetMapping("/showMoto/{id}")
@@ -55,7 +55,7 @@ public class MotoController {
 	
 	@CrossOrigin
 	@PutMapping(value = "updateMoto/{id}")
-	public Moto updateMoto (@PathVariable int id, @RequestBody Moto moto){
+	public static Moto updateMoto (@PathVariable int id, @RequestBody Moto moto){
 		try {
 			Moto findedMoto = mr.findById(id);
 			moto.setId(id);
@@ -63,6 +63,7 @@ public class MotoController {
 			mr.save(findedMoto);
 			return findedMoto;
 		} catch (Exception e) {
+			System.out.println(e);
 			// TODO: handle exception
 		}
 		

@@ -19,15 +19,16 @@ import com.brq.EMotos.models.User;
 import com.brq.EMotos.repository.AddressRepository;
 import com.brq.EMotos.repository.UserRepository;
 
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
 	@Autowired
-	private UserRepository ur;
+	private static UserRepository ur;
 	
 	@Autowired
-	private AddressRepository ar;
+	private static AddressRepository ar;
 	
 	@CrossOrigin
 	@PostMapping(value = "/login")
@@ -92,7 +93,7 @@ public class UserController {
 	
 	@CrossOrigin
 	@PutMapping(value = "updateUser/{id}")
-	public User updateUser (@PathVariable int id, @RequestBody User user){
+	public static User updateUser (@PathVariable int id, @RequestBody User user){
 		try {
 			User findedUser = ur.findById(id);
 			user.setId(id);
@@ -100,6 +101,7 @@ public class UserController {
 			ur.save(findedUser);
 			return findedUser;
 		} catch (Exception e) {
+			System.out.println(e);
 			// TODO: handle exception
 		}
 		
