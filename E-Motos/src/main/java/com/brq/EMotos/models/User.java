@@ -2,10 +2,12 @@ package com.brq.EMotos.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -19,7 +21,16 @@ public class User implements Serializable {
 	
 	private String name;
 	
+	@Column(unique=true)
 	private String email;
+	
+	private String birthDate;
+	
+	@Column(unique=true)
+	private String cpf;
+	
+	@Column(unique=true)
+	private String cnh;
 	
 	private String password;
 	
@@ -27,30 +38,24 @@ public class User implements Serializable {
 	
 	private String type;
 	
-	private String cpf;
+	private String statusRentUser;
 	
-	private String zipCode;
+	@OneToOne
+	private Address addressUser;
 	
-	private String neighborhood;
-	
-	private long number;
-	
-	private String city;
-	
-	private String state;
-	
-	private String street;
-	
+	@OneToOne
+	private Rent rentId;
+
 	
 	// Gatters ans Setter
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -65,6 +70,30 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getCnh() {
+		return cnh;
+	}
+
+	public void setCnh(String cnh) {
+		this.cnh = cnh;
 	}
 
 	public String getPassword() {
@@ -91,60 +120,32 @@ public class User implements Serializable {
 		this.type = type;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public Address getAddressUser() {
+		return addressUser;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setAddressUser(Address addressUser) {
+		this.addressUser = addressUser;
 	}
 
-	public String getZipCode() {
-		return zipCode;
+	public Rent getRentId() {
+		return rentId;
 	}
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setRentId(Rent rentId) {
+		this.rentId = rentId;
 	}
 
-	public String getNeighborhood() {
-		return neighborhood;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setNeighborhood(String neighborhood) {
-		this.neighborhood = neighborhood;
+	public String getStatusRentUser() {
+		return statusRentUser;
 	}
 
-	public long getNumber() {
-		return number;
+	public void setStatusRentUser(String statusRentUser) {
+		this.statusRentUser = statusRentUser;
 	}
 
-	public void setNumber(long number) {
-		this.number = number;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-	
 }

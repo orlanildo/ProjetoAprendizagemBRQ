@@ -2,6 +2,7 @@ package com.brq.EMotos.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Moto implements Serializable {
 	
 	private String version;
 	
+	@Column(unique=true)
 	private String licensePlate;
 	
 	private float displacement;
@@ -36,6 +38,10 @@ public class Moto implements Serializable {
 	private String description;
 	
 	private float pricePerKm;
+	
+	private String foto;
+	
+	private String statusRent;
 
 	
 	// Gatters ans Setter
@@ -125,6 +131,22 @@ public class Moto implements Serializable {
 
 	public void setPricePerKm(float pricePerKm) {
 		this.pricePerKm = pricePerKm;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getStatusRent() {
+		return statusRent;
+	}
+
+	public void setStatusRent(String statusRent) {
+		this.statusRent = statusRent;
 	}
 	
 }

@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <html lang="en">
 
 <head>
@@ -37,10 +36,11 @@
 	<script src="../../crontrollers/app.js"></script>
 	<script src="../../crontrollers/loginController.js"></script>
 	<script src="../../crontrollers/registerController.js"></script>
+	<script src="../../crontrollers/homeController.js"></script>
 
 </head>
 
-<body ng-app="app" ng-controller="loginController">
+<body ng-app="app" ng-controller="loginController" >
 
 	<form method="post" class="form-signin">
 		
@@ -59,6 +59,8 @@
 				<input type="checkbox" value="remember-me"> Remember me
 			</label>
 		</div>
+		
+		<button ng-click="listMotos()">ListMotos</button>
 		
 		<button class="btn btn-lg btn-primary btn-block" type="submit" 
 			ng-click="logar()">Logar</button>
