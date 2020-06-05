@@ -1,0 +1,139 @@
+<link rel="stylesheet" href="../css/register.css">
+
+<div>
+    <div class="container-fluid">
+        <div >
+            <form class="form-signin" name="formRegister" ng-submit="saveClient()">
+                <h1 class="h3 mb-3 font-weight-normal text-center">Registre-se</h1>
+                {{messageRegister}}
+                <!-- Address Informations-->
+                <div class="form-group">
+                    <label for="inputZipCode" class="sr-only">Cep</label>
+                    <input type="zipCode" name="inputZipCode" id="inputZipCode" class="form-control" placeholder="CEP" autofocus
+                    ng-model="addressClient.zipCode" required> 
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.zipCode.$error.required" class="form-control alert-danger">
+                        Campo CEP é obrigatório!
+                    </span> -->
+                </div>
+
+                <div class="input-group form-group">
+                    <label for="inputStreet" class="sr-only">Rua</label>
+                    <input type="street" name="street" id="inputStreet" class="form-control" placeholder="Rua" autofocus
+                        ng-model="addressClient.street" required>
+
+                    <label for="inputNumber" class="sr-only">Numero</label>
+                    <input id="inputNumber" name="number" class="form-control col-md-2" placeholder="Nº" autofocus
+                        ng-model="addressClient.number" required>
+                    
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.street.$error.required" class="form-control alert-danger">
+                        Endereço é obrigatório!
+                      </span>
+                    <span ng-show="formRegister.$submitted && formRegister.number.$error.required" class="form-control alert-danger">
+                        Número é obrigatório!
+                    </span> -->
+                </div>
+                
+                <div class="form-group">
+                    <label for="inputNeighborhood" class="sr-only">Bairro</label>
+                    <input type="neighborhood" name="neighborhood" id="inputNeighborhood" class="form-control" placeholder="Bairro" autofocus
+                    ng-model="addressClient.neighborhood" required>
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.neighborhood.$error.required" class="form-control alert-danger">
+                        Bairro é obrigatório!
+                    </span> -->
+                </div>
+
+                <div class="input-group form-group">
+                    <label for="inputCity" class="sr-only">Cidade</label>
+                    <input type="city" name="city" id="inputCity" class="form-control" placeholder="Cidade" autofocus
+                        ng-model="addressClient.city" required>
+                    
+                    <label for="inputState" class="sr-only">Estado</label>
+                    <select type="state" name="state" id="inputState" class="form-control col-md-4" placeholder="Estado" autofocus
+                        ng-model="addressClient.state" required>
+                        <option>SP</option>
+                        <option>RJ</option>
+                        <option>BH</option>
+                        <option>MT</option>
+                    </select>
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.city.$error.required" class="form-control alert-danger">
+                        Cidade é obrigatório!
+                    </span> -->
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.state.$error.required" class="form-control alert-danger">
+                        Estado é obrigatório!
+                    </span> -->
+
+                </div>
+
+                <!-- User Informations-->
+                <div class="form-group">
+                    <label for="inputCpf" class="sr-only">CPF</label>
+                    <input type="cpf" name="cpf" id="inputCpf" class="form-control" placeholder="CPF" autofocus 
+                        ng-model="client.cpf" required>
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.cpf.$error.required" class="form-control alert-danger">
+                        CPF é obrigatório!
+                    </span> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="inputCnh" class="sr-only">CNH</label>
+                    <input type="cnh" name="cnh" id="inputCnh" class="form-control" placeholder="CNH" autofocus 
+                    ng-model="client.cnh" required>
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.state.$error.required" class="form-control alert-danger">
+                        CNH é obrigatório!
+                    </span> -->
+                </div>
+                
+                <div class="form-group">
+                    <label for="inputName" class="sr-only">Nome Completo</label>
+                    <input type="name" name="name" id="inputName" class="form-control" placeholder="Nome Completo" autofocus
+                    ng-model="client.name" required>
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.name.$error.required" class="form-control alert-danger">
+                        Nome é obrigatório!
+                    </span> -->
+                </div>
+                
+                <div class="form-group">
+                    <label for="inputCellPhone" class="sr-only">Telefone</label>
+                    <input type="cellPhone" name="cellPhone" id="inputCellPhone" class="form-control" placeholder="Telefone"
+                    ng-model="client.cellPhone" required>
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.cellPhone.$error.required" class="form-control alert-danger">
+                        Estado é obrigatório!
+                    </span> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="sr-only">Email</label>
+                    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" autofocus
+                    ng-model="client.email" required>
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.email.$error.required" class="form-control alert-danger">
+                        Estado é obrigatório!
+                    </span> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword" class="sr-only">Senha</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Senha"
+                    ng-model="client.password">
+
+                    <!-- <span ng-show="formRegister.$submitted && formRegister.state.$error.required" class="form-control alert-danger">
+                        Estado é obrigatório!
+                    </span> -->
+                </div>
+                
+                <button ng-disabled="formRegister.$invalid" class="btn btn-lg btn-primary" type="submit" >Salvar</button>
+                <button class="btn btn-lg btn-primary" ng-click="goToLogin()">Cancelar</button>
+
+                <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
+            </form>
+        </div>
+    </div>
+</div>

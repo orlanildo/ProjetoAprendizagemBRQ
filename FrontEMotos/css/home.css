@@ -1,0 +1,100 @@
+.btn-devolver{
+  margin: 10px;
+}
+
+
+.info{
+    padding-top: 20px;
+}
+
+.info-motos{
+  background-color: white;
+  
+}
+
+.img-thumbnail{
+    width: 100%; 
+    min-height: 265px;
+    max-height: 265px;
+    padding: 10px;
+    margin: 25px;
+}
+
+.panel {
+    padding: 5px;
+    margin: 20px;
+    border: 1px solid grey;
+    border-radius: 30px;
+    width: 29%;
+}
+
+.panel:hover{
+    border: 1px solid rgb(149, 172, 241);
+}
+
+.form-control{
+  margin: 5px;
+}
+
+.jumbotron {
+  background-color: white;
+  padding: -10px;
+}
+
+ .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #428bca;
+    color: white;
+  }
+  
+  .modal-body {
+    padding: 2px 16px;
+    background-color: #fff;
+  }
+  
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #428bca;
+    color: white;
+  }
+
