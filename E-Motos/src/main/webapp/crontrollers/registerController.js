@@ -1,5 +1,5 @@
 
-app.controller('registerController', function ($scope, $http) {
+angular.module('app').controller('registerController', function ($scope, $http) {
     $scope.client = {}
 
     console.log('Entrou no controle de Register')

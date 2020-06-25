@@ -32,6 +32,20 @@ public class Address implements Serializable {
 	private String complement;
 
 	
+	public Address() {}
+	
+	public Address(String zipCode, String neighborhood, long number, String city, 
+			String state, String street, String complement) {
+		
+		this.zipCode = zipCode;
+		this.neighborhood = neighborhood;
+		this.number = number;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.complement = complement;
+	}
+
 	
 	// Gatters ans Setter
 	public int getId() {

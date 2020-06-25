@@ -7,5 +7,4 @@ import com.brq.EMotos.models.Rent;
 public interface RentRepository extends CrudRepository<Rent, String> {
 	
 	Rent findById(int id);
-
 }

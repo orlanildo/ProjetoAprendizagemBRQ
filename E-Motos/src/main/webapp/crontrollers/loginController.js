@@ -1,5 +1,5 @@
 
-app.controller('loginController', function ($scope, $http, $location) {
+angular.module('app').controller('loginController', function ($scope, $http, $location) {
     $scope.client = {}
 
     console.log('Entrou no controle de login')

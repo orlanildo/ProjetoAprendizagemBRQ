@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -19,23 +21,35 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+	@NotBlank(message = "{name.not.blank}")
 	private String name;
 	
+	@Email(message = "{email.not.valid}")
+	@NotBlank(message = "{email.not.blank}")
 	@Column(unique=true)
 	private String email;
 	
-	private String birthDate;
+	//@NotBlank
+	//private String birthDate;
 	
+	@NotBlank
 	@Column(unique=true)
+	//@Size(min = 11, max = 11)
 	private String cpf;
 	
+	@NotBlank
 	@Column(unique=true)
+	//@Size(min = 11, max = 11)
 	private String cnh;
 	
+	@NotBlank(message = "{senha.not.blank}")
 	private String password;
 	
+	@NotBlank
+	//@Size(min = 11, max = 11)
 	private String cellPhone;
 	
+	@NotBlank
 	private String type;
 	
 	private String statusRentUser;
@@ -43,7 +57,33 @@ public class User implements Serializable {
 	@OneToOne
 	private Address addressUser;
 	
+	@OneToOne
+	private Rent rentId;
 	
+	
+	public User() {}
+	
+	public User(int id, @NotBlank(message = "{name.not.blank}") String name,
+			@Email(message = "{email.not.valid}") @NotBlank(message = "{email.not.blank}") String email,
+			@NotBlank String cpf, @NotBlank String cnh, @NotBlank(message = "{senha.not.blank}")
+			String password, @NotBlank String cellPhone, @NotBlank String type,
+			String statusRentUser, Address addressUser, Rent rentId) {
+		
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		//this.birthDate = birthDate;
+		this.cpf = cpf;
+		this.cnh = cnh;
+		this.password = password;
+		this.cellPhone = cellPhone;
+		this.type = type;
+		this.statusRentUser = statusRentUser;
+		this.addressUser = addressUser;
+		this.rentId = rentId;
+	}
+
+
 	// Gatters ans Setter
 	public int getId() {
 		return id;
@@ -69,6 +109,7 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	/*
 	public String getBirthDate() {
 		return birthDate;
 	}
@@ -76,7 +117,8 @@ public class User implements Serializable {
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
-
+	 */
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -125,6 +167,14 @@ public class User implements Serializable {
 		this.addressUser = addressUser;
 	}
 
+	public Rent getRentId() {
+		return rentId;
+	}
+
+	public void setRentId(Rent rentId) {
+		this.rentId = rentId;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -136,5 +186,5 @@ public class User implements Serializable {
 	public void setStatusRentUser(String statusRentUser) {
 		this.statusRentUser = statusRentUser;
 	}
-		
+
 }

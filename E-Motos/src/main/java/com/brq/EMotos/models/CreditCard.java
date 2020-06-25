@@ -2,7 +2,6 @@ package com.brq.EMotos.models;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +17,10 @@ public class CreditCard implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(unique=true)
 	private String cpfHolder;
 	
 	private String cardHolder;
 	
-	@Column(unique=true)
 	private String cardNumber;
 	
 	private String flag;
@@ -33,6 +30,19 @@ public class CreditCard implements Serializable {
 	private String dueDate;
 
 	
+	public CreditCard() {}
+	
+	public CreditCard(String cpfHolder, String cardHolder, String cardNumber, 
+			String flag, int cvv, String dueDate) {
+		
+		this.cpfHolder = cpfHolder;
+		this.cardHolder = cardHolder;
+		this.cardNumber = cardNumber;
+		this.flag = flag;
+		this.cvv = cvv;
+		this.dueDate = dueDate;
+	}
+
 	
 	// Gatters ans Setter
 	public int getId() {
