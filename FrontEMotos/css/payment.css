@@ -1,56 +1,124 @@
-.container-info{
+.container-info {
     margin: auto;
-    width: 60%;
-    margin-top: 10px;
+    width: 70%;
     padding: 5px;
     border-radius: 20px;
 }
- 
-.container-pagamento{
+
+.text-up{
+    font-size: 20px;
+}
+
+.container-info-rent{
+    margin: auto;
+    width: 70%;
+    padding: 5px;
+    border-radius: 20px;
+    height: 400px;
+}
+
+.additional-options {
+    margin: auto;
+    width: 100%;
+    margin-top: 55px;
+    margin-left: -15px;
+}
+
+.rentSuccess{
+    margin: 20px;
+    padding: 80px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(226, 211, 211, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1px 20px;
+}
+
+.conteudo {
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(226, 211, 211, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1px 20px;
+}
+
+.info-pedido {
+    margin-top: 70px;
+}
+
+.text-success{
+    font-size: 37px;
+    color: #42ca5f;
+    margin-top: -50px;
+    border-left: #42ca5f 4px solid;
+    padding-left: 10px;
+}
+
+div h1 {
+    font-size: 37px;
+    color: #428bca;
+    margin-top: -50px;
+    border-left: #428bca 4px solid;
+    padding-left: 10px;
+}
+
+div h4 {
+    font-size: 20px;
+    color: #428bca;
+    padding-top: 10px;
+}
+
+div h5 {
+    font-size: 16px;
+    color: #428bca;
+    padding-top: 10px;
+}
+
+.container-pagamento {
     width: 60%;
     align-items: center;
 }
- 
-.btn-cartao{
-  float: right;
-  padding-top: 10px;
+
+.btn-cartao {
+    float: right;
+    padding-top: 10px;
 }
- 
-.info{
+
+.info {
     padding-top: 20px;
 }
- 
-.img-moto{
+
+.img-moto {
     width: 100%;
     height: auto;
     margin-top: 40px;
     padding: 10px;
     margin: 25px;
 }
- 
+
 .form-control {
-  margin-top: 6px;
+    margin-top: 6px;
 }
- 
-.form-group input[type="dueDate"]{
-  margin-left: 5px;
+
+.form-group input[type="dueDate"] {
+    margin-left: 5px;
 }
- 
-.form-group input[type="zipcode"]{
-  margin-left: 5px;
-  margin-right: 5px;
+
+.form-group input[type="zipcode"] {
+    margin-left: 5px;
+    margin-right: 5px;
 }
- 
-.form-group input[type="city"]{
-  margin-left: 5px;
-  margin-right: 5px;
+
+.form-group input[type="city"] {
+    margin-left: 5px;
+    margin-right: 5px;
 }
- 
-.form-group input[type="street"]{
-  margin-left: 5px;
-  margin-right: 5px;
+
+.form-group input[type="street"] {
+    margin-left: 5px;
+    margin-right: 5px;
 }
- 
-.form-group select[type="flag"]{
-  margin-left: 5px;
+
+.form-group select[type="flag"] {
+    margin-left: 5px;
 }

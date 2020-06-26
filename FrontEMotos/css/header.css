@@ -1,18 +1,20 @@
+body {
+  margin: 0;
+}
+
 #container {
   width: 75%;
   margin: auto;
-  padding: 20px;
 }
 
 .header {
-  min-width: 100%;
-  text-align: center;
-  overflow: hidden;
-  background-color: #428bca;
-  position: unset;
   top: 0;
-  left: 0;
-  
+  background-color: #428bca;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 .header a {

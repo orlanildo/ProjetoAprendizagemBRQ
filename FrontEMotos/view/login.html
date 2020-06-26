@@ -1,41 +1,45 @@
 <link rel="stylesheet" href="../css/login.css">
 
-<div class="container-login" >
-	<form novalidate class="form-signin" name="formLogin" ng-submit="logar()">
+<div class="container-login">
+    <div class="card">
+        <form novalidate class="form-signin" name="formLogin" ng-submit="logar()">
 
-		<h1 class="mb-3 font-weight-normal text-center"><i class='fas fa-motorcycle' style='font-size:36px'></i> E-MOTOS
-		</h1>
-		<br />
-		<div class="form-group">
-			<label for="inputEmail" class="sr-only">Email address</label>
-			<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus
-				ng-model="client.email" required>
+            <h1 class="mb-3 font-weight-normal text-center"><i class='fas fa-motorcycle' style='font-size:36px'></i> E-MOTOS
+            </h1>
+            <br />
+            <div class="form-group">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus ng-model="client.email" required>
 
-			<span ng-show="formLogin.$submitted && formLogin.email.$error.required" class="form-control alert-danger">
-				Preencha o campo de e-mail!
-			</span>  
-		</div>
-		<div class="form-group">
-			<label for="inputPassword" class="sr-only">Password</label>
-			<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
-				ng-model="client.password" required>
+                <span ng-show="formLogin.$submitted && formLogin.email.$invalid" class="form-control alert-danger">
+                    {{mensagemEmailNull}}
+				</span>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="client.password" required>
 
-			<span ng-show="formLogin.$submitted && formLogin.password.$error.required" class="form-control alert-danger">
-				Preencha o campo de senha!
-			</span>
-			
-		</div>
+                <span ng-show="formLogin.$submitted && formLogin.password.$invalid" class="form-control alert-danger">
+					{{mensagemPasswordNull}}
+                </span>
+                
+                <span ng-show="mensagemLoginInvalido.length && formLogin.$submitted" class="form-control alert-danger">
+					{{mensagemLoginInvalido}}
+                </span>
 
-		<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" value="remember-me"> Remember me
-			</label>
-		</div>
+            </div>
+            <div class="checkbox mb-3">
+                <label>
+					<input type="checkbox" value="remember-me"> Remember me
+				</label>
+            </div>
 
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
-		<button class="btn btn-lg btn-primary btn-block" ng-click="goToRegister()">Cadastrar-se</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
+            <button class="btn btn-lg btn-primary btn-block" ng-click="goToRegister()">Cadastrar-se</button>
+            <button ng-disabled="true" class="btn btn-lg btn-danger btn-block" ng-click="goToPayment()">Teste</button>
 
-		<p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
+            <p class="mt-5 mb-3 text-muted text-center">&copy; E-Motos &#8212; 2020</p>
 
-	</form>
+        </form>
+    </div>
 </div>
