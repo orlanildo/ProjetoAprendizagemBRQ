@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -24,12 +25,12 @@ public class Moto implements Serializable {
 	
 	private String model;
 	
-	private String version;
+	//private String version;
 	
 	@Column(unique=true)
 	private String licensePlate;
 	
-	private float displacement;
+	private long displacement;
 	
 	private String year;
 	
@@ -41,20 +42,20 @@ public class Moto implements Serializable {
 	
 	private String photoMoto;
 	
-	private String statusRent;
+	private boolean statusRent;
 	
 	
 	public Moto() {}
 	
-	public Moto(int id, String name, String brand, String model, String version, String licensePlate,
-			float displacement, String year, long km, String description, float pricePerKm, String photoMoto,
-			String statusRent) {
+	public Moto(int id, String name, String brand, String model, String licensePlate,
+			long displacement, String year, long km, String description, float pricePerKm, String photoMoto,
+			@NotBlank boolean statusRent) {
 		
 		this.id = id;
 		this.name = name;
 		this.brand = brand;
 		this.model = model;
-		this.version = version;
+		//this.version = version;
 		this.licensePlate = licensePlate;
 		this.displacement = displacement;
 		this.year = year;
@@ -98,6 +99,7 @@ public class Moto implements Serializable {
 		this.model = model;
 	}
 
+	/*
 	public String getVersion() {
 		return version;
 	}
@@ -105,6 +107,7 @@ public class Moto implements Serializable {
 	public void setVersion(String version) {
 		this.version = version;
 	}
+	*/
 
 	public String getLicensePlate() {
 		return licensePlate;
@@ -114,11 +117,11 @@ public class Moto implements Serializable {
 		this.licensePlate = licensePlate;
 	}
 
-	public float getDisplacement() {
+	public long getDisplacement() {
 		return displacement;
 	}
 
-	public void setDisplacement(float displacement) {
+	public void setDisplacement(long displacement) {
 		this.displacement = displacement;
 	}
 
@@ -162,11 +165,11 @@ public class Moto implements Serializable {
 		this.photoMoto = photoMoto;
 	}
 
-	public String getStatusRent() {
+	public boolean getStatusRent() {
 		return statusRent;
 	}
 
-	public void setStatusRent(String statusRent) {
+	public void setStatusRent(boolean statusRent) {
 		this.statusRent = statusRent;
 	}
 	

@@ -51,7 +51,7 @@ class RentTest {
 		CreditCard creditCardFinded = new CreditCard("testCpfHolder", "testCardHolder",
 			"testCardNumber", "testFlag", 321, "testDueDate");
 		
-		 Rent rentFilled = new Rent(true, 800, true, true, 
+		 Rent rentFilled = new Rent(true, 800, 0, true, true, 
 			userService.findUserById(3), motoService.findMotoById(1), 
 			creditCardFinded, null, null);
 		

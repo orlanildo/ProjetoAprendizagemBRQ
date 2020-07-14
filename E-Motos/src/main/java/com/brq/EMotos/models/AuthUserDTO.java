@@ -5,7 +5,7 @@ public class AuthUserDTO {
 
 	private int id;
 	private String email;
-	private String password;
+	//private String password;
 	private String type;
 	private String token;
 	
@@ -36,6 +36,7 @@ public class AuthUserDTO {
 		this.email = email;
 	}
 	
+	/*
 	public String getPassword() {
 		return password;
 	}
@@ -43,6 +44,7 @@ public class AuthUserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	*/
 	
 	public String getType() {
 		return type;

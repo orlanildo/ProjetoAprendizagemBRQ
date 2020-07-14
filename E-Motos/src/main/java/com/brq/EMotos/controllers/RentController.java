@@ -14,7 +14,7 @@ import com.brq.EMotos.models.Rent;
 import com.brq.EMotos.services.RentService;
 
 
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RestController
 @RequestMapping("/rent")
 public class RentController {
@@ -22,11 +22,11 @@ public class RentController {
 	@Autowired
     private RentService rentService;
     
-	
 	@GetMapping("/showRent")
-	public ResponseEntity<?> showRent(@RequestAttribute("idUserLoged") int idUserLoged) {
-		if(rentService.findRent(idUserLoged) != null) 
-			return ResponseEntity.ok(rentService.findAllRent());
+	public ResponseEntity<?> showRent(@RequestAttribute("idUserLoged") int idUserLoged){
+		Rent rent = rentService.findRent(idUserLoged);
+		if(rent != null) 
+			return ResponseEntity.ok(rent);
 		else
 			return ResponseEntity.notFound().build();
 	}

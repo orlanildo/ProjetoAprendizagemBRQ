@@ -33,6 +33,7 @@ public class MotoService {
 	}
 	
 	public Moto createMoto(@Valid Moto moto)  {
+		moto.setStatusRent(false);
 		Moto motoCreated = mr.save(moto);
 		if(motoCreated != null)
 			return motoCreated;

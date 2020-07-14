@@ -1,5 +1,6 @@
 package com.brq.EMotos.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.brq.EMotos.models.AuthUserDTO;
 import com.brq.EMotos.models.User;
 import com.brq.EMotos.services.LoginService;
 
@@ -25,15 +27,21 @@ public class loginController {
 	
 	
 	@PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody User user, HttpServletResponse response) {
-
-		return ResponseEntity.ok(loginService.login(user, response));
+    public ResponseEntity<?> login(@RequestBody User user, HttpServletResponse response, 
+    		HttpServletRequest request) {
+		
+		AuthUserDTO userLoged = loginService.login(user, response, request);
+		if(userLoged != null)
+			//return ResponseEntity.ok().header("Autorization", userLoged.getToken()).body(userLoged);
+			return ResponseEntity.ok().body(userLoged);
+		else
+			return ResponseEntity.notFound().build();
     }
 	
 	@GetMapping("logout")
-    public ResponseEntity<?> logout(){
+    public ResponseEntity<?> logout(HttpServletRequest request){
 		
-		loginService.logout();
+		loginService.logout(request);
 		return ResponseEntity.ok().build();
 	}
 

@@ -51,7 +51,7 @@ class UserTest {
 				"testState", "testStreet", "testComplement"); 
 		
 		User userPrenchido = new User(100, "userTestTest", "userTestTest@gmail.com", 
-				"12345678", "12345678", "1234", "123456789", "admin", "notRented", addressUser, null);
+				"12345678", "12345678", "1234", "123456789", "admin", false, addressUser, null);
 		
         User userCreated = userService.createUser(userPrenchido);
 		
@@ -66,7 +66,7 @@ class UserTest {
 			"testState", "testStreet", "testComplement"); 
 		
         User userPrenchido = new User(41 ,"User Updated", "userUpdated@gmail.com", "12345678", "12345678",
-        	"1234", "123456789", "admin", "notRented", addressUser, null);
+        	"1234", "123456789", "admin", false, addressUser, null);
         
         User userUpdated = userService.updateUser(43, userPrenchido);
        
@@ -77,7 +77,7 @@ class UserTest {
 	
 	@Test
     public void testDeleteUser() {
-        String userDeleted =  userService.deleteUser(78+3);
+        String userDeleted =  userService.deleteUser(43);
        
         Assertions.assertThat(userDeleted.equals("deleted"));
     }

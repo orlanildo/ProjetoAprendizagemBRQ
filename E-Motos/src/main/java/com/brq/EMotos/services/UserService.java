@@ -41,7 +41,7 @@ public class UserService {
 		
 		if(addressUser != null) {
 			user.setAddressUser(ar.save(addressUser));
-			user.setStatusRentUser("notRented");
+			user.setStatusRentUser(false);
             user.setType("client");
            
             return ur.save(user);

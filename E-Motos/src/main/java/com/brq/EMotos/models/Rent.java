@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -18,11 +19,12 @@ public class Rent implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	// colocar pra gerar automáticamente
 	// colocar para ser único @Column(unique=true)
 	private String protocol;
 	
 	private boolean helmet;
+	
+	private int rentalOptionByKm;
 	
 	private long finalPrice;
 	
@@ -39,21 +41,23 @@ public class Rent implements Serializable {
 	@OneToOne
 	private CreditCard creditCardRentId;
 	
+	@NotNull
 	@OneToOne
 	private Address addressReceivementId;
 	
+	@NotNull
 	@OneToOne
 	private Address addressRemovalId;
 	
 	
 	public Rent() {}
 	
-	public Rent(boolean helmet, long finalPrice, boolean pickGarage,
-			boolean turnOverGarage, User userRentId, Moto motoRentId, 
-			CreditCard creditCardRentId, Address addressReceivementId,
-			Address addressRemovalId) {
+	public Rent(boolean helmet, int rentalOptionByKm, long finalPrice, boolean pickGarage,
+			boolean turnOverGarage, User userRentId, Moto motoRentId, CreditCard creditCardRentId,
+			Address addressReceivementId, Address addressRemovalId) {
 		
 		this.helmet = helmet;
+		this.rentalOptionByKm = rentalOptionByKm;
 		this.finalPrice = finalPrice;
 		this.pickGarage = pickGarage;
 		this.turnOverGarage = turnOverGarage;
@@ -113,6 +117,14 @@ public class Rent implements Serializable {
 	public void setHelmet(boolean helmet) {
 		this.helmet = helmet;
 	}
+	
+	public int getRentalOptionByKm() {
+		return rentalOptionByKm;
+	}
+
+	public void setRentalOptionByKm(int rentalOptionByKm) {
+		this.rentalOptionByKm = rentalOptionByKm;
+	}
 
 	public long getFinalPrice() {
 		return finalPrice;
@@ -158,87 +170,4 @@ public class Rent implements Serializable {
 		return serialVersionUID;
 	}
 	
-	/*
-	public String getCpfHolder() {
-		return cpfHolder;
-	}
-
-	public void setCpfHolder(String cpfHolder) {
-		this.cpfHolder = cpfHolder;
-	}
-
-	public String getCardHolder() {
-		return cardHolder;
-	}
-
-	public void setCardHolder(String cardHolder) {
-		this.cardHolder = cardHolder;
-	}
-
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-
-	public String getFlag() {
-		return flag;
-	}
-
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
-
-	public int getCvv() {
-		return cvv;
-	}
-
-	public void setCvv(int cvv) {
-		this.cvv = cvv;
-	}
-
-	public String getDueDate() {
-		return dueDate;
-	}
-
-	public void setDueDate(String dueDate) {
-		this.dueDate = dueDate;
-	}
-	
-	
-	//temp
-	public int getuserRentIdRentIdId() {
-		return userRentIdRentIdId;
-	}
-
-	public void setuserRentIdRentIdId(int userRentIdRentIdId) {
-		this.userRentIdRentIdId = userRentIdRentIdId;
-	}
-
-	public int getMotoId() {
-		return motoId;
-	}
-
-	public void setMotoId(int motoId) {
-		this.motoId = motoId;
-	}
-
-	public int getAddressReceivementId() {
-		return addressReceivementId;
-	}
-
-	public void setAddressReceivementId(int addressReceivementId) {
-		this.addressReceivementId = addressReceivementId;
-	}
-
-	public int getAddressRemovalId() {
-		return addressRemovalId;
-	}
-
-	public void setAddressRemovalId(int addressRemovalId) {
-		this.addressRemovalId = addressRemovalId;
-	}
-	*/
 }

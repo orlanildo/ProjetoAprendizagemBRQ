@@ -18,7 +18,7 @@ import com.brq.EMotos.models.Moto;
 import com.brq.EMotos.services.MotoService;
 
 
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RestController
 @RequestMapping("/moto")
 public class MotoController {
@@ -35,11 +35,12 @@ public class MotoController {
 			return ResponseEntity.notFound().build();
 	}
 	
+	@CrossOrigin
 	@GetMapping("/listMotos")
 	public ResponseEntity<?> listMotos() {
-		//Iterable<Moto> motoFinded = motoService.findAllMoto();
-		if(motoService.findAllMoto() != null) 
-			return ResponseEntity.ok(motoService.findAllMoto());
+		Iterable<Moto> motoFinded = motoService.findAllMoto();
+		if(motoFinded != null) 
+			return ResponseEntity.ok(motoFinded);
 		else
 			return ResponseEntity.notFound().build();
 	}

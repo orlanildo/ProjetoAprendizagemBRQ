@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brq.EMotos.models.Address;
+import com.brq.EMotos.models.Moto;
 import com.brq.EMotos.models.Rent;
+import com.brq.EMotos.models.User;
 import com.brq.EMotos.repository.AddressRepository;
 import com.brq.EMotos.repository.CreditCardRepository;
 import com.brq.EMotos.repository.RentRepository;
@@ -41,65 +43,86 @@ public class RentService {
         letters.forEach(t::append);
         return t.toString();
     }
+    
+    public static long calcPrice(int rentalOptionByKm, float pricePerKm, boolean helmet) {
+    	if(helmet)
+    		return (long) (pricePerKm * rentalOptionByKm + 20.00);
+    	else
+    		return (long) (pricePerKm * rentalOptionByKm);
+    }
 	
-	public Rent findRent(int idUserLoged)  {
-		int idRentOfUser = userService.findUserById(idUserLoged).getRentId().getId();
-		if(rr.findById(idRentOfUser) != null)
-			return rr.findById(idRentOfUser);
-		else
-			return null;
-	}
-	
-	public Iterable<Rent> findAllRent()  {
-		if(rr.findAll() != null)
-			return rr.findAll();
-		else
-			return null;
-	}
-	
-	public Rent createRent(Rent rent)  {
+	public Rent findRent(int idUserLoged) {
+		User userLoged = userService.findUserById(idUserLoged);
 		
+		Rent rentFinded = rr.findByProtocol(userLoged.getRentProtocol());
+		
+		if(rentFinded != null)
+			return rentFinded;
+		else
+			return null;
+	}
+	
+	public Iterable<Rent> findAllRent() {
+		Iterable<Rent> listRent = rr.findAll();
+		if(listRent != null)
+			return listRent;
+		else
+			return null;
+	}
+	
+	public Rent createRent(Rent rent) {
+		
+        User userFinded = userService.findUserById(rent.getUserRentId().getId());
+        
+        Moto motoFinded = motoService.findMotoById(rent.getMotoRentId().getId());
+        
+        if(rent.getCreditCardRentId() == null ||
+        		userFinded == null || motoFinded == null || 
+        		motoFinded.getStatusRent() == true ||
+        		userFinded.getStatusRentUser() == true ||
+        		(!rent.isPickGarage() && rent.getAddressReceivementId() == null) ||
+        		(!rent.isTurnOverGarage() && rent.getAddressRemovalId() == null)){
+        	
+        	return null;
+        }
+        
+        rent.setMotoRentId(motoFinded);
+        rent.setUserRentId(userFinded);
+        rent.setCreditCardRentId(cr.save(rent.getCreditCardRentId()));
+        rent.setProtocol(shuffle(motoFinded.getLicensePlate() + userFinded.getCpf()));
+        
+    	// address defaut
+    	//R. Boa Vista, 254 - Centro Histórico de São Paulo, São Paulo - SP, 01014-000
+        Address addressDeault = ar.save(new Address("01014-000", "Centro Histórico",
+        	254, "São Paulo", "SP", "R. Boa Vista", null));
+        
         //AddressReceivement
-        if(!rent.isPickGarage()) {
-            if(rent.getAddressReceivementId() != null) {
-                Address addressRentReceivement = ar.save(rent.getAddressReceivementId());
-                rent.setAddressReceivementId(addressRentReceivement);
-            }
+        if(!rent.isPickGarage() && rent.getAddressReceivementId() != null) {
+            Address addressRentReceivement = ar.save(rent.getAddressReceivementId());
+            rent.setAddressReceivementId(addressRentReceivement);
         }else {
-            rent.setAddressReceivementId(rent.getUserRentId().getAddressUser());
+            rent.setAddressReceivementId(addressDeault);
         } 
             
         //AddressRemoval
-        if(!rent.isTurnOverGarage()) {
-            if(rent.getAddressRemovalId() != null) {
-                Address addressRentRemoval = ar.save(rent.getAddressRemovalId());
-                rent.setAddressRemovalId(addressRentRemoval);
-            }
+        if(!rent.isTurnOverGarage() && rent.getAddressRemovalId() != null) {
+            Address addressRentRemoval = ar.save(rent.getAddressRemovalId());
+            rent.setAddressRemovalId(addressRentRemoval);
         }else {
-            rent.setAddressRemovalId(rent.getUserRentId().getAddressUser());
+            rent.setAddressRemovalId(addressDeault);
         }
         
-        //CreditCar
-        if(rent.getCreditCardRentId() != null) {
-            rent.setCreditCardRentId(cr.save(rent.getCreditCardRentId()));
-        }
-                    
-        //Moto
-        if(rent.getMotoRentId().getStatusRent().equals("rent")) {
-        	motoService.updateMoto(rent.getMotoRentId().getId(), rent.getMotoRentId());
-        }
+        rent.setFinalPrice(calcPrice(rent.getRentalOptionByKm(), 
+        	motoFinded.getPricePerKm(), rent.isHelmet()));
         
-        //User
-        if(rent.getUserRentId().getStatusRentUser().equals("rented")) {
-        	userService.updateUser(rent.getUserRentId().getId(), rent.getUserRentId());
-        }
+        motoFinded.setStatusRent(true);
+        motoService.updateMoto(motoFinded.getId(), motoFinded);
         
-        String protocol = rent.getMotoRentId().getLicensePlate() + rent.getUserRentId().getCpf();
-        
-        rent.setProtocol(shuffle(protocol));
+        userFinded.setStatusRentUser(true);
+        userFinded.setRentProtocol(rent.getProtocol());
+        userService.updateUser(userFinded.getId(), userFinded);
         
         return rr.save(rent);
-        
 	}
 	
 }

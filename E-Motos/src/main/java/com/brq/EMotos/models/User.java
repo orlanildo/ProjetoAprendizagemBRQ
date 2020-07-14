@@ -52,13 +52,12 @@ public class User implements Serializable {
 	@NotBlank
 	private String type;
 	
-	private String statusRentUser;
+	private boolean statusRentUser;
 	
 	@OneToOne
 	private Address addressUser;
 	
-	@OneToOne
-	private Rent rentId;
+	private String rentProtocol;
 	
 	
 	public User() {}
@@ -67,7 +66,7 @@ public class User implements Serializable {
 			@Email(message = "{email.not.valid}") @NotBlank(message = "{email.not.blank}") String email,
 			@NotBlank String cpf, @NotBlank String cnh, @NotBlank(message = "{senha.not.blank}")
 			String password, @NotBlank String cellPhone, @NotBlank String type,
-			String statusRentUser, Address addressUser, Rent rentId) {
+			boolean statusRentUser, Address addressUser, String rentProtocol) {
 		
 		this.id = id;
 		this.name = name;
@@ -80,7 +79,7 @@ public class User implements Serializable {
 		this.type = type;
 		this.statusRentUser = statusRentUser;
 		this.addressUser = addressUser;
-		this.rentId = rentId;
+		this.rentProtocol = rentProtocol;
 	}
 
 
@@ -167,23 +166,23 @@ public class User implements Serializable {
 		this.addressUser = addressUser;
 	}
 
-	public Rent getRentId() {
-		return rentId;
+	public String getRentProtocol() {
+		return rentProtocol;
 	}
 
-	public void setRentId(Rent rentId) {
-		this.rentId = rentId;
+	public void setRentProtocol(String rentProtocol) {
+		this.rentProtocol = rentProtocol;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public String getStatusRentUser() {
+	public boolean getStatusRentUser() {
 		return statusRentUser;
 	}
 
-	public void setStatusRentUser(String statusRentUser) {
+	public void setStatusRentUser(boolean statusRentUser) {
 		this.statusRentUser = statusRentUser;
 	}
 
