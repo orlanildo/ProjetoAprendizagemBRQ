@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="../css/listRent.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/header.css">
+
+<header>
+    <div class="header" style="border-bottom: black solid 1px;">
+        <div id="container">
+            <a class="logo" type="logo">E-MOTOS <i class="fas fa-motorcycle"></i></a>
+            <div class="header-right">
+                <a href="#home">Contact</a>
+                <a href="/view/home">Home</a>
+                <a href="/view/">Exit</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="conteinerBody jumbotron" >
+    <br>
+    <div class="row">
+        <div class="containerRent" ng-repeat="rent in listRent | filter: filtro">
+            <!-- CONTRATOS ATIVOS, MOSTRAR APENAS SE TIVER! -->
+            <div class="text-center">
+                <h1 style="font-size: 35px; color: green; margin-bottom: 10px;">Contrato ativo</h1>
+                <hr>
+                <p><strong>Moto: </strong> {{rent.motoRentId.name}} - {{rent.motoRentId.model}}</p>
+                <p><strong>Protocolo: </strong> {{rent.protocol}}</p>
+                <p><strong>Endereço para receber a moto: </strong> {{rent.addressReceivementId.street}},
+                    {{rent.addressReceivementId.number}} - {{rent.addressReceivementId.city}}</p>
+                <p><strong>Endereço para devolver a moto: </strong> {{rent.addressRemovalId.street}},
+                    {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.city}}</p>
+                <p><strong>Valor total: </strong> {{rent.finalPrice | currency: "R$"}}</p>
+
+                <button ng-click="returnMoto(rent.id)" class="btn btn-primary btn-devolver" style="margin-bottom: 15px;">Liberar Contrato</button>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+<!-- Rodapé -->
+<footer>
+    <div class="footer">
+        <div id="container">
+            <div class="row">
+                <div class="container">
+                    <h3>SOBRE O E-MOTOS:</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+                        dapibus dui id lacus sagittis interdum. Aliquam a faucibus nisi.
+                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                        posuere cubilia curae; Quisque ipsum nulla, ultricies vitae
+                        aliquet ut, consectetur non nunc.. </p>
+                </div>
+                <div class="container" id="contact">
+                    <div class="icon-bar">
+                        <a href="#emotos-facebook" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#emotos-twitter" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#emotos-google+" class="google"><i class="fa fa-google"></i></a>
+                        <a href="#emotos-linkedin" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        <a href="#emotos-youtube" class="youtube"><i class="fa fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="text-center">&copy; E-Motos &#8212; Aluguel de Motos &#8212; 2020</span>
+    </div>
+</footer>

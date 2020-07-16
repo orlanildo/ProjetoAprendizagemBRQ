@@ -32,6 +32,8 @@ public class Rent implements Serializable {
 	
 	private boolean turnOverGarage;
 	
+	private boolean activeContract;
+	
 	@OneToOne
 	private User userRentId;
 	
@@ -148,6 +150,14 @@ public class Rent implements Serializable {
 
 	public void setTurnOverGarage(boolean turnOverGarage) {
 		this.turnOverGarage = turnOverGarage;
+	}
+	
+	public boolean isActiveContract() {
+		return activeContract;
+	}
+
+	public void setActiveContract(boolean activeContract) {
+		this.activeContract = activeContract;
 	}
 	
 	public Address getAddressReceivementId() {

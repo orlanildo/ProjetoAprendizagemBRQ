@@ -1,0 +1,67 @@
+{
+	"helmet": true,
+	"finalPrice": 123.01,
+	"pickGarage": true,
+	"turnOverGarage": true,
+		
+	"motoRentId": {
+    "id": 1,
+    "name": "biz",
+    "brand": "Honda",
+    "model": "Cross",
+    "version": "",
+    "licensePlate": "4321sp",
+    "displacement": 0.0,
+    "year": "2020",
+    "km": 5000,
+    "description": "Moto em excelente estado",
+    "pricePerKm": 20.0,
+    "photoMoto": "https://http2.mlstatic.com/moto-honda-fan160-esdi1920-0km-3-anos-garantia-ler-anuncio-D_NQ_NP_661405-MLB30220719189_052019-F.webp",
+    "statusRent": "rent"
+	},
+	
+	"userRentId": {  
+    "id": 3,
+    "name": "user",
+    "email": "user@brq.com",
+    "birthDate": "11/03/1995",
+    "cpf": "87456123",
+    "cnh": "321564564",
+    "password": "1234",
+    "cellPhone": "11 123465789",
+    "type": "boss",
+    "statusRentUser": "rented",
+    "addressUser": {
+      "id": 2,
+      "zipCode": "1234-123",
+      "neighborhood": "Conceição",
+      "number": 92,
+      "city": "Osasco",
+      "state": "SP",
+      "street": "Rua: Flor de MArgarida",
+      "complement": "casa 2"
+    }
+	},
+	
+	"creditCardRentId": {
+    "cpfHolder": "4614651",
+    "cardHolder": "Bruno",
+    "cardNumber": "456154",
+    "flag": "Visa",
+    "cvv": 110,
+    "dueDate": null
+	},
+	
+	"addressReceivementId": {
+		"zipCode": "0312-123",
+    "neighborhood": "address rent 2",
+    "number": 92,
+    "city": "rent 2",
+    "state": "SP",
+    "street": "address rent",
+    "complement": "address rent 2"
+	},
+	
+	"addressRemovalId": null
+	
+}

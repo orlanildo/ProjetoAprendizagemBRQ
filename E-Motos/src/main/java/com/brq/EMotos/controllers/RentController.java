@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,15 @@ public class RentController {
 		else
 			return ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("/releaseRent/{id}")
+    public ResponseEntity<?> releaseRent(@PathVariable int id) {
+		Rent releaseRent = rentService.releaseContract(id);
+		if(releaseRent != null) 
+			return ResponseEntity.ok(releaseRent);
+		else
+			return ResponseEntity.notFound().build();
+    }
     
     @PostMapping("/createRent")
     public Rent createRent(@RequestBody Rent rent) {
