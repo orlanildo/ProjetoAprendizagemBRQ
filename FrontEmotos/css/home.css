@@ -1,33 +1,61 @@
+.btn-devolver {
+    margin: 10px;
+}
 
-.info{
+.container-rent {
+    margin: auto;
+    width: 40%;
+    margin-top: 50px;
+    box-shadow: 0 4px 4px 0 rgba(226, 211, 211, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+    border: green solid 1px;
+}
+
+.info {
     padding-top: 20px;
 }
 
-.info-motos{
-  background-color: white;
+.img-thumbnail {
+    width: 98%;
+    min-height: 220px;
+    max-height: 220px;
 }
 
-.img-thumbnail{
-    width: 100%; 
-    min-height: 265px;
-    max-height: 265px;
-    margin-top: 40px;
-    padding: 10px;
-    margin: 25px;
-}
 
-.panel {
-    padding: 5px;
-    margin: 5px;
-    border: 1px solid grey;
-    border-radius: 30px;
+/* .panel {
+  padding: 5px;
+  margin: 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: 29%;
 }
 
 .panel:hover{
     border: 1px solid rgb(149, 172, 241);
+} */
+
+.card {
+    margin: 15px;
+    margin-top: 25px;
+    margin-left: 27px;
+    padding: 5px;
+    width: 30%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(226, 211, 211, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* Modal Content */
+.card:hover {
+    border: 1px solid rgb(149, 172, 241);
+}
+
+.form-control {
+    margin: 5px;
+}
+
+.jumbotron {
+    background-color: white;
+    padding: -10px;
+}
+
 .modal-content {
     position: relative;
     background-color: #fefefe;
@@ -35,56 +63,62 @@
     padding: 0;
     border: 1px solid #888;
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-  }
-  
-  /* Add Animation */
-  @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-  }
-  
-  @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.close {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
-  
-  .modal-header {
+}
+
+.modal-header {
     padding: 2px 16px;
     background-color: #428bca;
     color: white;
-  }
-  
-  .modal-body {
+}
+
+.modal-body {
     padding: 2px 16px;
     background-color: #fff;
-  }
-  
-  .modal-footer {
+}
+
+.modal-footer {
     padding: 2px 16px;
     background-color: #428bca;
     color: white;
-  }
-
-  .form-control{
-    margin: 5px;
-  }
+}

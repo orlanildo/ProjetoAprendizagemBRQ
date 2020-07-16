@@ -1,105 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
-	<base href="/">
+    <base href="/">
+    <meta charset="UTF-8">
 
-	<!-- Import JQuery -->
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
+    <!--Importando Script Jquery-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-	<!-- Import Bootstrap -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-		crossorigin="anonymous"></script>
+    <!-- Import JQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
 
-	<!-- Import Font -->
-	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	<link rel="sortcut icon" type="image/png" href="../img/moto-icon.png" />
+    <!-- Import Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-	<style>
-		.container{
-			width: 200%;
-			padding: 5px;
-			/* background-color: rgb(149, 172, 241); */
-			border-radius: 10px;
-		}
-	</style>
-	<!-- Import CSS -->
-	<link rel="stylesheet" href="../css/header.css">
-	<link rel="stylesheet" href="../css/footer.css">
+    <!-- Import Font -->
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="sortcut icon" type="image/png" href="../img/moto-icon.png" />
 
-	<!-- Import AngularJS -->
-	<script src="../angularjs/angular/angular.min.js"></script>
-	<script src="../angularjs/angular-route/angular-route.min.js"></script>
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
 
-	<!-- Controllers -->
-	<script src="../controllers/app.js"></script>
-	<script src="../controllers/route.js"></script>
-	<script src="../controllers/loginController.js"></script>
-	<script src="../controllers/registerController.js"></script>
-	<script src="../controllers/homeController.js"></script>
-	<script src="../controllers/paymentController.js"></script>
+    <!-- Import AngularJS -->
+    <script src="../angularjs/lib/angular.min.js"></script>
+    <script src="../angularjs/lib/angular-animate.min.js"></script>
+    <script src="../angularjs/lib/angular-route.min.js"></script>
+
+    <!-- Controllers -->
+    <script src="../controllers/app.js"></script>
+    <script src="../controllers/route.js"></script>
+    <script src="../controllers/loginController.js"></script>
+    <script src="../controllers/registerController.js"></script>
+    <script src="../controllers/homeController.js"></script>
+    <script src="../controllers/listRentController.js"></script>
+    <script src="../controllers/paymentController.js"></script>
 </head>
 
-<body ng-app="app">
-
-	<!-- <div ng-include="'header.html'"></div> -->
-	<header >
-		<div class="header">
-			<div id="container">
-				<span class="fas fa-motorcycle"></span>
-				<a href="#default" class="logo"> E-MOTOS</a>
-				<div class="header-right">
-					<a class="active" href="#contact">Contact</a>
-					<a href="#addmore">Add more</a>
-					<a href="#exit">Exit</a>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div class="container" ng-view></div>
-	
-	<!-- <div ng-include="'footer.html'"></div> -->
-	<footer>
-		<div class="footer">
-			<div id="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="footer-left">
-							<h3>SOBRE O E-MOTO:</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus dui id lacus
-								sagittis interdum.
-								Aliquam a faucibus nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-								posuere cubilia curae;
-								Quisque ipsum nulla, ultricies vitae aliquet ut, consectetur non nunc.. </p>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="footer-right">
-							<ul>
-								<li>Alguma coisa 1</li>
-								<li>Alguma coisa 2</li>
-								<li>Alguma coisa 3</li>
-								<li>Alguma coisa 4</li>
-								<li>Alguma coisa 5</li>
-								<li>Alguma coisa 6</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<span class="text-center">&copy; 2020</span>
-		</div>
-	</footer>
-
+<body>
+    <div ng-view></div>
 </body>
 
 </html>

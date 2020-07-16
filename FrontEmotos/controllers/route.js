@@ -9,6 +9,10 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             controller: 'registerController',
             templateUrl: 'view/register.html'
         })
+        .when('/view/listRent', {
+            controller: 'listRentController',
+            templateUrl: 'view/listRent.html'
+        })
         .when('/view/home', {
             controller: 'homeController',
             templateUrl: 'view/home.html'
@@ -24,7 +28,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             templateUrl: 'view/header.html'
         })
 
-
+        
     //Utilizando o HTML5 History API
     $locationProvider.html5Mode({
         enabled: true,

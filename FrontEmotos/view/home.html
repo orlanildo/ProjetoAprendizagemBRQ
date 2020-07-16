@@ -1,140 +1,241 @@
 <link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/header.css">
 
+<header >
+    <div class="header" style="border-bottom: black solid 1px;">
+        <div id="container">
+            <a class="logo" type="logo">E-MOTOS <i class="fas fa-motorcycle"></i></a>
+            <div class="header-right">
+                <a ng-click="goToListRent()">Lista de Contratos</a>
+                <a href="#contact">Contact</a>
+                <a ng-hide="userClient(user.type)" ng-click="limparFormulario()" href="#addMore" data-toggle="modal" data-target="#addMore">Addmore</a>
+                <a href="/view/">Exit</a>
+            </div>
+        </div>
+    </div>
+</header>
 
-<div class="jumbotron"> 
-	<!-- Nome e email do user da sessão  -->
-	<h5 style="padding-left: 10px;">
-		E-mail: ${clientLoged.email}<br> Nome: ${clientLoged.name}
-	</h5>
-	
+<div class="jumbotron">
+    <!-- CONTRATOS ATIVOS, MOSTRAR APENAS SE TIVER! -->
+    <div ng-show="userRented(user.statusRentUser)" class="container-rent text-center">
+        <h1 style="font-size: 35px; color: green; margin-bottom: 10px;">Contrato ativo</h1>
+        <hr>
+        <p><strong>Moto: </strong> {{rent.motoRentId.name}} - {{rent.motoRentId.model}}</p>
+        <p><strong>Protocolo: </strong> {{rent.protocol}}</p>
+        <p><strong>Endereço para receber a moto: </strong> {{rent.addressReceivementId.street}}, {{rent.addressReceivementId.number}} - {{rent.addressReceivementId.city}}</p>
+        <p><strong>Endereço para devolver a moto: </strong> {{rent.addressRemovalId.street}}, {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.city}}</p>
+        <p><strong>Valor total: </strong> {{rent.finalPrice | currency: "R$"}}</p>
 
-	<!-- Header -->
-	<!-- <div ng-include="'header.html'"></div> -->
-	<!-- <header>
-		<div class="header">
-			<div id="container">
-				<span class="fas fa-motorcycle"></span>
-				<a href="#default" class="logo"> E-MOTOS</a>
-				<div class="header-right">
-					<a class="active" href="#contact">Contact</a>
-					<a href="#addmore">Add more</a>
-					<a href="#exit">Exit</a>
-				</div>
-			</div>
-		</div>
-	</header> -->
+        <!-- <button ng-click="devolverMoto(rent)" class="btn btn-primary btn-devolver">Devolver moto</button> -->
+    </div>
 
-	<!-- CONTEUDO 1 - POR QUE A E-MOTOS -->
-	<div class="jumbotron text-center" style="background-color: #fff;">
-		<h1 style="font-size: 55px; color: #428bca;">Por que escolher o
-			E-Motos?</h1>
-		<br>
-		<br>
-		<div class="row">
-			<div class="col-md-4">
-				<span class="far fa-check-circle" style="font-size: 40px; color: #91E88E;"></span>
-				<h3>Melhores motos</h3>
-				<p>Nós estamos aqui para te oferecer as melhores motos do
-					mercado.</p>
-			</div>
-			<div class="col-md-4">
-				<span class="fas fa-headset" style="font-size: 40px; color: black;"></span>
-				<h3>Melhor atendimento</h3>
-				<p>Prezamos pelos nossos clientes, entregamos o melhor
-					atendimento com uma equipe atenta 24H.</p>
-			</div>
-			<div class="col-md-4">
-				<span class="far fa-money-bill-alt" style="font-size: 40px; color: #91E88E;"></span>
-				<h3>Melhores preços</h3>
-				<p>Os preços mais acessíveis para que você consiga garantir uma
-					moto pro dia-a-dia.</p>
-			</div>
-		</div>
-		<br>
-		<br>
-		<br>
-		<div class="row">
-			<div class="col-md-4">
-				<span class="far fa-thumbs-up" style="font-size: 40px; color: #428bca;"></span>
-				<h3>Qualidade</h3>
-				<p>Todas as nossas motos tem os melhores equipamentos do
-					mercado.</p>
-			</div>
+    <!-- CONTEUDO 1 - POR QUE A E-MOTOS -->
+    <div class="jumbotron text-center">
+        <h1 style="font-size: 55px; color: #428bca;">Por que escolher o E-Motos?
+        </h1>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <span class="far fa-check-circle" style="font-size: 40px; color: #91E88E;"></span>
+                <h3>Melhores motos</h3>
+                <p>Nós estamos aqui para te oferecer as melhores motos do mercado.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <span class="fas fa-headset" style="font-size: 40px; color: black;"></span>
+                <h3>Melhor atendimento</h3>
+                <p>Prezamos pelos nossos clientes, entregamos o melhor atendimento com uma equipe atenta 24H.</p>
+            </div>
+            <div class="col-md-4">
+                <span class="far fa-money-bill-alt" style="font-size: 40px; color: #91E88E;"></span>
+                <h3>Melhores preços</h3>
+                <p>Os preços mais acessíveis para que você consiga garantir uma moto pro dia-a-dia.</p>
+            </div>
+        </div>
 
-			<div class="col-md-4">
-				<span class="fas fa-running" style="font-size: 40px; color: black;"></span>
-				<h3>Agilidade</h3>
-				<p>Trabalhamos para que a entrega seja o mais rápido possível.</p>
-			</div>
-			<div class="col-md-4">
-				<span class="far fa-handshake" style="font-size: 40px; color: #428bca;"></span>
-				<h3>Confiança</h3>
-				<p>Confiança é a base da nossa relação com os clientes.</p>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<!-- FIM DO CONTEÚDO 1 -->
+        <br> <br> <br>
 
-	<!-- <button ng-click="listMotos()">ListMotos</button> -->
+        <div class="row">
+            <div class="col-md-4">
+                <span class="far fa-thumbs-up" style="font-size: 40px; color: #428bca;"></span>
+                <h3>Qualidade</h3>
+                <p>Todas as nossas motos tem os melhores equipamentos do mercado.
+                </p>
+            </div>
 
-	<div class="container-fluid text-center info-motos" >
-		<h1 style="font-size: 55px; color: #428bca;">Nossas opções de motos</h1>
-		<div class="row">
-			<div class="panel panel-default text-center col-sm-3" ng-repeat="moto in motos ">
-				<div class="panel-heading ">
-					<a class="col-md-2"><img src="{{moto.photoMoto}}" class="img-thumbnail mx-auto d-block" style="border: 0;">
-					</a>
-				</div>
-				<hr>
-				<div>
-					<p><b>Information:</b> {{moto.brand}} - {{moto.name}} - {{moto.model}} </p>
-					<p><b>Details:</b> {{moto.description}} </p>
-					<p><b>KM:</b> {{moto.km}}</p>
-				</div>
-				<hr>
-				<div>
-					<button type="submit" ng-click="goToPayment(moto)" class="btn btn-primary ">Alugue</button>
-					<button id="alterarMoto" class="btn btn-primary " data-toggle="modal"
-						data-target="#addMore">Alterar</button>
-					<button class="btn btn-primary ">Excluir</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<button ng-click="sair()">Exit</button>
-	<!-- Rodapé -->
-	<!-- <div ng-include="'footer.html'"></div> -->
+            <div class="col-md-4">
+                <span class="fas fa-running" style="font-size: 40px; color: black;"></span>
+                <h3>Agilidade</h3>
+                <p>Trabalhamos para que a entrega seja o mais rápido possível.</p>
+            </div>
+            <div class="col-md-4">
+                <span class="far fa-handshake" style="font-size: 40px; color: #428bca;"></span>
+                <h3>Confiança</h3>
+                <p>Confiança é a base da nossa relação com os clientes.</p>
+            </div>
+        </div>
+    </div>
+    <!-- FIM DO CONTEÚDO 1 -->
 
-	<!-- <div class="footer">
-		<div id="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="footer-left">
-						<h3>SOBRE O E-MOTO:</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus dui id lacus
-							sagittis interdum.
-							Aliquam a faucibus nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-							posuere cubilia curae;
-							Quisque ipsum nulla, ultricies vitae aliquet ut, consectetur non nunc.. </p>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="footer-right">
-						<ul>
-							<li>Alguma coisa 1</li>
-							<li>Alguma coisa 2</li>
-							<li>Alguma coisa 3</li>
-							<li>Alguma coisa 4</li>
-							<li>Alguma coisa 5</li>
-							<li>Alguma coisa 6</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<span class="text-center">&copy; 2020</span>
-	</div> -->
+    <div style="width: 10%; margin: auto; margin-top: -30px; margin-bottom: 40px;" >
+        <p style="border-bottom: #428bca solid 3px;"></p>
+    </div>
 
-</body>
+    <div class="container-fluid text-center info-emotos">
+        <h1 style="font-size: 55px; color: #428bca;">Nossas opções de motos</h1>
+
+        <!-- Pesquisar motos -->
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <input class="form-control" placeholder="Encontre uma moto pra você" ng-model="filtro" ng-model-options="{ debounce: 800 }">
+                </form>
+            </div>
+            <!-- fim col-md-12 -->
+        </div>
+        <!-- fim row -->
+        <div ng-show="mensagemRemoverSucesso.length" class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Successo!</strong> {{mensagemRemoverSucesso}}
+        </div>
+
+        <div ng-show="mensagemRemoverFalha.length" class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Falhou!</strong> {{mensagemRemoverFalha}}
+        </div>
+
+        <div class="row">
+            <div class="card info" ng-repeat="moto in motos | filter: filtro" ng-hide="esconderMoto(moto.statusRent)">
+                <div class="card-img-top" alt="Card image" style="width:100%">
+                    <img src="{{moto.photoMoto}}" class="img-thumbnail mx-auto d-block" style="border: 0;">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title" style="color: #428bca; border-bottom: #428bca 2px solid; border-bottom-width: auto;">
+                        {{moto.name | uppercase}} - {{moto.year}}</h4>
+                    <p class="card-text"><b>Information:</b> {{moto.brand}} - {{moto.model}} </p>
+                    <p class="card-text"><b>Details:</b> {{moto.description}} </p>
+                    <p class="card-text"><b>Price per 20km:</b> {{moto.pricePerKm | currency: "R$"}} </p>
+                    <p class="card-text"><b>KM:</b> {{moto.km}}</p>
+                    <p class="card-text" style="color: green; font-size: 20px;">Disponível</p>
+                </div>
+                <hr>
+                <div>
+                    <button ng-click="goToPayment(moto)" ng-disabled="userRented(user.statusRentUser)" type="submit" class="btn btn-outline-primary">Alugue</button>
+                    <button ng-click="marcarMotoAlterar(moto)" ng-hide="userClient(user.type)" id="alterarMoto" class="btn btn-outline-primary" data-toggle="modal" data-target="#addMore">Alterar</button>
+                    <button ng-click="deleteMoto(moto)" ng-hide="userClient(user.type)" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteMoto">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addMore" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form class="form-signin" name="formMoto">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Adicionar moto</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="inputLicensePlate" class="sr-only">Placa</label>
+                        <input type="text" name="licensePlate" id="inputLicensePlate" class="form-control" 
+                            placeholder="Placa" ng-model="moto.licensePlate" ng-required="true">
+                        
+                        <label for="inputDisplacement" class="sr-only">Cilindrada</label>
+                        <input type="text" name="displacement" id="inputDisplacement" class="form-control" 
+                            placeholder="Cilindrada" ng-model="moto.displacement" ng-required="true">
+
+                        <label for="inputBrand" class="sr-only">Marca</label>
+                        <input type="text" name="brand" id="inputBrand" class="form-control"
+                            placeholder="Marca" ng-model="moto.brand" ng-required="true">
+
+                        <label for="inputName" class="sr-only">Nome</label>
+                        <input type="text" name="name" id="inputName" class="form-control" 
+                            placeholder="Name" ng-model="moto.name" ng-required="true">
+
+                        <label for="inputModal" class="sr-only">Modelo</label>
+                        <input type="text" name="model" id="inputModal" class="form-control" 
+                            placeholder="Modelo" ng-model="moto.model" ng-required="true">
+
+                        <label for="inputYear" class="sr-only">Ano</label>
+                        <input type="text" name="year" id="inputYear" class="form-control" 
+                            placeholder="Ano" ng-model="moto.year" ng-required="true">
+
+                        <label for="inputPricePerKm" class="sr-only">Preço</label>
+                        <input type="text" name="pricePerKm" id="inputPricePerKm" class="form-control" 
+                            placeholder="Preço para cada 10KM" ng-model="moto.pricePerKm" ng-required="true">
+
+                        <label for="inputKm" class="sr-only">KM</label>
+                        <input type="text" name="km" id="inputKm" class="form-control" placeholder="Kms rodados" 
+                            ng-model="moto.km" ng-required="true">
+
+                        <label for="InputDescription" class="sr-only">Descrição</label>
+                        <textarea type="text" name="description" id="InputDescription" class="form-control" 
+                            placeholder="Descrição" ng-model="moto.description"></textarea>
+
+                        <label for="photoMoto" class="sr-only">Ano</label>
+                        <input type="url" name="photoMoto" id="inputPhotoMoto" class="form-control" 
+                            placeholder="Url da foto" ng-model="moto.photoMoto" ng-required="true">
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-disabled="formMoto.$invalid" ng-click="createMoto(moto)" type="submit" 
+                            class="btn btn-dark" data-dismiss="modal">Salvar</button>
+                        <button ng-click="limparFormulario()" type="button" class="btn btn-danger" 
+                            data-dismiss="modal">Exit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Excluir Motos -->
+    <div class="modal fade" id="deleteMoto">
+        <div class="modal-dialog border-light">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{removerTitulo}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <div ng-show="mensagemRemoverFalha.length" class="modal-body alert">
+                    <h4 style="color: red; font-size: 25px; padding: 20px;">{{mensagemRemoverFalha}}</h4>
+                </div>
+                <div ng-show="mensagemRemoverSucesso.length" class="modal-body alert">
+                    <h4 style="color: green; font-size: 25px; padding: 20px;">{{mensagemRemoverSucesso}}</h4>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rodapé -->
+<footer>
+    <div class="footer">
+        <div id="container">
+            <div class="row">
+                <div class="container">
+                    <h3>SOBRE O E-MOTOS:</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent 
+                        dapibus dui id lacus sagittis interdum. Aliquam a faucibus nisi. 
+                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices 
+                        posuere cubilia curae; Quisque ipsum nulla, ultricies vitae 
+                        aliquet ut, consectetur non nunc.. </p>
+                </div>
+                <div class="container" id="contact">
+                    <div class="icon-bar">
+                        <a href="#emotos-facebook" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#emotos-twitter" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#emotos-google+" class="google"><i class="fa fa-google"></i></a>
+                        <a href="#emotos-linkedin" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        <a href="#emotos-youtube" class="youtube"><i class="fa fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="text-center">&copy; E-Motos &#8212; Aluguel de Motos &#8212; 2020</span>
+    </div>
+</footer>

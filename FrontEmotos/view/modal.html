@@ -1,4 +1,3 @@
-
 <!-- Modal -->
 <div class="modal fade" id="addMore" role="dialog">
     <div class="modal-dialog">
@@ -9,16 +8,10 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <label for="inputMarca" class="sr-only">Marca</label> <input type="text" name="brand" id=""
-                    class="form-control" placeholder="Marca" ng-model=""> <label for="inputMarca"
-                    class="sr-only">Nome</label> <input type="text" name="name" id="" class="form-control"
-                    placeholder="Name" ng-model=""> <label for="inputMarca" class="sr-only">Modelo</label> <input
-                    type="text" name="model" id="" class="form-control" placeholder="Modelo" ng-model=""> <label
-                    for="inputMarca" class="sr-only">Ano</label>
-                <input type="text" name="year" id="" class="form-control" placeholder="Ano" ng-model=""> <label
-                    for="inputMarca" class="sr-only">Descri��o</label>
-                <textarea placeholder="Descri��o" type="text" name="description" id="" class="form-control"
-                    placeholder="Descri��o" ng-model=""></textarea>
+                <label for="inputMarca" class="sr-only">Marca</label> <input type="text" name="brand" id="" class="form-control" placeholder="Marca" ng-model=""> <label for="inputMarca" class="sr-only">Nome</label> <input type="text" name="name" id=""
+                    class="form-control" placeholder="Name" ng-model=""> <label for="inputMarca" class="sr-only">Modelo</label> <input type="text" name="model" id="" class="form-control" placeholder="Modelo" ng-model=""> <label for="inputMarca" class="sr-only">Ano</label>
+                <input type="text" name="year" id="" class="form-control" placeholder="Ano" ng-model=""> <label for="inputMarca" class="sr-only">Descri��o</label>
+                <textarea placeholder="Descri��o" type="text" name="description" id="" class="form-control" placeholder="Descri��o" ng-model=""></textarea>
 
             </div>
             <div class="modal-footer">
@@ -27,5 +20,30 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+
+<!-- CONTRATOS ATIVOS -->
+<div id="accordion" class="container-rent" ng-show="userRented(user.statusRentUser)">
+    <div class="card">
+        <div class="card-header" style="background-color: white;">
+            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                <h1 style="font-size: 35px; color: #428bca; ">Contrato ativo</h1>
+            </a>
+        </div>
+        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+                <p><strong>Moto: </strong> {{rent.motoRentId.name}} - {{rent.motoRentId.model}}</p>
+                <p><strong>Protocolo: </strong> {{rent.protocol}}</p>
+                <p><strong>Endereço para receber a moto: </strong> {{rent.addressReceivementId.street}},
+                    {{rent.addressReceivementId.number}} - {{rent.addressReceivementId.city}}</p>
+                <p><strong>Endereço para devolver a moto: </strong> {{rent.addressRemovalId.street}},
+                    {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.city}}</p>
+                <p><strong>Valor total: </strong> {{rent.finalPrice | currency: "R$"}}</p>
+
+                <button class="btn btn-primary btn-devolver">Devolver moto</button>
+            </div>
+        </div>
     </div>
 </div>

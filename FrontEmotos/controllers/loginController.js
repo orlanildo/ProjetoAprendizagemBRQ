@@ -1,30 +1,43 @@
-
 angular.module('app').controller('loginController', 
-	function ($scope, $http, $location, $rootScope) {
+	function ($scope, $http, $location, $rootScope, $window) {
 
 	//loginController.$inject = ['$rootScope', 'location', 'SETTINGS']
-
     $scope.client = {}
-	$scope.usuarioLogado = {}
-	
+	$rootScope.usuarioLogado = {}
+	$scope.mensagemLoginInvalido = ""
+	$scope.mensagemEmailNull = ""
+	$scope.mensagemPasswordNull = ""
+
     $scope.logar = function (){
-		console.log("logar")
-    	$http.post("http://localhost:8080/user/login", $scope.client).then(function(response){
-    		if(response.data != null){
-				$rootScope.user = response.data;
-
-				console.log($rootScope.user)
-
-				$location.path("/view/home")
-    		}
-    	}, function(response){
-    		console.log(response)
-    	})
-    }    
+		if($scope.formLogin.$valid){
+			$http.post("http://localhost:8080/login", $scope.client)
+				.then(function(response, config){
+					if(response.data != null){
+						$window.localStorage.setItem("token", response.data.token)
+						$rootScope.user = response.data;
+						$location.path("/view/home")
+					}
+			})
+			.catch(function(erro){
+				$scope.mensagemLoginInvalido = "E-mail ou Senha Inválida!";
+			});
+		}
+		else{
+			if($scope.client.email == null && $scope.client.password == null){
+				$scope.mensagemEmailNull = "Preencha o e-mail!"
+				$scope.mensagemPasswordNull = "Preencha a senha!"
+			}
+			else if($scope.client.password == null){$scope.mensagemPasswordNull = "Preencha a senha!"}
+			else if($scope.client.password == null){$scope.mensagemEmailNull = "Preencha o e-mail!"}
+		}
+		
+	}
 
     $scope.goToRegister = function (){
-
 		$location.path("/view/register")
-    	//window.location.href = "/view/register.html"
+	} 
+
+	$scope.goToPayment = function (){
+		$location.path("/view/payment")
     } 
 })
