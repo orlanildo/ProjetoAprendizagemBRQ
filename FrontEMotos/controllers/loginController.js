@@ -1,5 +1,5 @@
 angular.module('app').controller('loginController', 
-	function ($scope, $http, $location, $rootScope) {
+	function ($scope, $http, $location, $rootScope, $window) {
 
 	//loginController.$inject = ['$rootScope', 'location', 'SETTINGS']
     $scope.client = {}
@@ -10,17 +10,16 @@ angular.module('app').controller('loginController',
 
     $scope.logar = function (){
 		if($scope.formLogin.$valid){
-			$http.post("http://localhost:8080/user/login", $scope.client).then(function(response){
-				if(response.data != null && response.data != ""){
-					$rootScope.user = response.data;
-					$location.path("/view/home")
-				}
-				else{
-					$scope.mensagemLoginInvalido = "E-mail ou Senha Inválida!";
-				}
+			$http.post("http://localhost:8080/login", $scope.client)
+				.then(function(response, config){
+					if(response.data != null){
+						$window.localStorage.setItem("token", response.data.token)
+						$rootScope.user = response.data;
+						$location.path("/view/home")
+					}
 			})
 			.catch(function(erro){
-				$scope.mensagemLoginInvalido = erro.message;
+				$scope.mensagemLoginInvalido = "E-mail ou Senha Inválida!";
 			});
 		}
 		else{

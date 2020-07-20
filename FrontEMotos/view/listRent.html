@@ -1,0 +1,193 @@
+<link rel="stylesheet" href="../css/listRent.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/header.css">
+
+<header>
+    <div class="header" style="border-bottom: black solid 1px;">
+        <div id="container">
+            <a class="logo" type="logo">E-MOTOS <i class="fas fa-motorcycle"></i></a>
+            <div class="header-right">
+                <a href="/view/home">Home</a>
+                <a href="/view/">Sair</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="conteinerBody jumbotron">
+    <br>
+
+    <!-- Pesquisar motos -->
+    <div class="row" style="margin-top: 15px; margin-bottom: 20px;">
+        <div class="col-md-12">
+            <form>
+                <input class="form-control" placeholder="Encontre um contrato" ng-model="filtro"
+                    ng-model-options="{ debounce: 800 }">
+            </form>
+        </div>
+        <!-- fim col-md-12 -->
+    </div>
+
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#all">Todos os Contratos</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#actived">Contratos Ativos</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#inatived">Contratos Inativos</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- TODOS OS CONTRATOS -->
+        <div id="all" class="tab-pane container "><br>
+            <h3 style="margin-left: 30px;">Todos os Contratos</h3>
+            <div class="row">
+                <div class="containerRent" ng-repeat="rent in listRent | filter: filtro">
+                    
+                    <!-- CONTRATOS ATIVOS, MOSTRAR APENAS SE TIVER! -->
+                    <div class="text-center">
+                        <h1 style="font-size: 35px; color: green; margin-bottom: 10px;"
+                            ng-if="rent.activeContract == 1">
+                            Contrato Ativo</h1>
+                        <h1 style="font-size: 35px; color: red; margin-bottom: 10px;" ng-if="rent.activeContract == 0">
+                            Contrato Inativo</h1>
+                        
+                        <hr><h4>Cliente </h4>
+                        <p><strong>Nome: </strong>{{rent.userRentId.name}}</p>
+                        <p><strong>E-mail: </strong> {{rent.userRentId.email}}</p>
+                        <p><strong>CPF: </strong>{{rent.userRentId.cpf}}</p>
+                        
+                        <hr><h4>Moto </h4>
+                        <p><strong>Moto: </strong> {{rent.motoRentId.name}} - {{rent.motoRentId.model}}</p>
+                        <p><strong>Protocolo: </strong> {{rent.protocol}}</p>
+                        <p><strong>Endereço para receber a moto: </strong> {{rent.addressReceivementId.street}},
+                            {{rent.addressReceivementId.number}} - {{rent.addressReceivementId.city}}</p>
+                        <p><strong>Endereço para devolver a moto: </strong> {{rent.addressRemovalId.street}},
+                            {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.city}}</p>
+                        <p><strong>Valor total: </strong> {{rent.finalPrice | currency: "R$"}}</p>
+
+                        <button ng-click="marcarRentDevolver(rent)" data-toggle="modal" data-target="#confirmar"
+                            ng-hide="rent.activeContract == 0" class="btn btn-primary btn-devolver"
+                            style="margin-bottom: 15px;">Liberar Contrato</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <!-- ATIVOS -->
+        <div id="actived" class="tab-pane container fade"><br>
+            <h3 style="margin-left: 30px;">Contratos Ativos</h3>
+            <div class="row">
+                <div class="containerRent" ng-hide="rent.activeContract != 1"
+                    ng-repeat="rent in listRent | filter: filtro">
+                    <!-- CONTRATOS ATIVOS, MOSTRAR APENAS SE TIVER! -->
+                    <div class="text-center">
+                        <h1 style="font-size: 35px; color: green; margin-bottom: 10px;">Contrato Ativo</h1>
+                        
+                        <hr><h4>Cliente </h4>
+                        <p><strong>Nome: </strong>{{rent.userRentId.name}}</p>
+                        <p><strong>E-mail: </strong> {{rent.userRentId.email}}</p>
+                        <p><strong>CPF: </strong>{{rent.userRentId.cpf}}</p>
+
+                        <hr><h4>Moto </h4>
+                        <p><strong>Moto: </strong> {{rent.motoRentId.name}} - {{rent.motoRentId.model}}</p>
+                        <p><strong>Protocolo: </strong> {{rent.protocol}}</p>
+                        <p><strong>Endereço para receber a moto: </strong> {{rent.addressReceivementId.street}},
+                            {{rent.addressReceivementId.number}} - {{rent.addressReceivementId.city}}</p>
+                        <p><strong>Endereço para devolver a moto: </strong> {{rent.addressRemovalId.street}},
+                            {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.city}}</p>
+                        <p><strong>Valor total: </strong> {{rent.finalPrice | currency: "R$"}}</p>
+
+                        <button ng-click="marcarRentDevolver(rent)" data-toggle="modal" data-target="#confirmar"
+                            class="btn btn-primary btn-devolver" style="margin-bottom: 15px;">Liberar Contrato</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <!-- INATIVOS -->
+        <div id="inatived" class="tab-pane container fade"><br>
+            <h3 style="margin-left: 30px;">Contratos Inativos</h3>
+            <div class="row">
+                <div class="containerRent" ng-hide="rent.activeContract != 0"
+                    ng-repeat="rent in listRent | filter: filtro">
+                    <!-- CONTRATOS ATIVOS, MOSTRAR APENAS SE TIVER! -->
+                    <div class="text-center">
+                        <h1 style="font-size: 35px; color: red; margin-bottom: 10px;">Contrato Inativo</h1>
+                        
+                        <hr><h4>Cliente </h4>
+                        <p><strong>Nome: </strong>{{rent.userRentId.name}}</p>
+                        <p><strong>E-mail: </strong> {{rent.userRentId.email}}</p>
+                        <p><strong>CPF: </strong>{{rent.userRentId.cpf}}</p>
+                        
+                        <hr><h4>Moto </h4>
+                        <p><strong>Moto: </strong> {{rent.motoRentId.name}} - {{rent.motoRentId.model}}</p>
+                        <p><strong>Protocolo: </strong> {{rent.protocol}}</p>
+                        <p><strong>Endereço para receber a moto: </strong> {{rent.addressReceivementId.street}},
+                            {{rent.addressReceivementId.number}} - {{rent.addressReceivementId.city}}</p>
+                        <p><strong>Endereço para devolver a moto: </strong> {{rent.addressRemovalId.street}},
+                            {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.city}}</p>
+                        <p><strong>Valor total: </strong> {{rent.finalPrice | currency: "R$"}}</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <!-- Modal Confirmação Devolver Moto -->
+    <div class="modal fade" id="confirmar">
+        <div class="modal-dialog border-light">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Realmente deseja liberar este contrato?</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body alert"><br>
+                    <h5>Deseja mesmo devolver a moto {{rentD.motoRentId.name}}</h5><br>
+                    <h5>Moto </h5>
+                    <p><strong>Nome: </strong> {{rentD.motoRentId.name}} - <strong>Modelo: </strong>{{rentD.motoRentId.model}}</p>
+                    <p><strong>Protocolo: </strong> {{rentD.protocol}}</p>
+
+                    <h5>Cliente </h5>
+                    <p><strong>Nome: </strong>{{rentD.userRentId.name}}</p>
+                    <p><strong>E-mail: </strong> {{rentD.userRentId.email}}</p>
+                    <p><strong>CPF: </strong>{{rentD.userRentId.cpf}}</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button ng-click="returnMoto(rentD)" type="submit" class="btn btn-danger" data-dismiss="modal"
+                        data-toggle="modal" data-target="#mensagemModal">Confirmar</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Mensagem Devolver Moto -->
+    <div class="modal fade" id="mensagemModal">
+        <div class="modal-dialog border-light">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">{{mensagemTitulo}}</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div ng-show="mensageFalha.length" class="modal-body alert">
+                    <h4 style="color: red; font-size: 25px; padding: 20px;">{{mensagemFalha}}</h4>
+                </div>
+                <div ng-show="mensagemSucesso.length" class="modal-body alert">
+                    <h4 style="color: green; font-size: 25px; padding: 20px;">{{mensagemSucesso}}</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

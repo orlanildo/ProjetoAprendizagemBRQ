@@ -100,10 +100,6 @@ div h5 {
     margin-top: 6px;
 }
 
-.form-group input[type="dueDate"] {
-    margin-left: 5px;
-}
-
 .form-group input[type="zipcode"] {
     margin-left: 5px;
     margin-right: 5px;
@@ -114,11 +110,40 @@ div h5 {
     margin-right: 5px;
 }
 
+.form-group select[type="state"] {
+    margin-right: 5px;
+}
+
 .form-group input[type="street"] {
     margin-left: 5px;
     margin-right: 5px;
 }
 
+.form-group input[type="number"] {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.form-group input[type="neighborhood"] {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.form-group input[type="dueDate"] {
+    margin-left: 5px;
+}
+
 .form-group select[type="flag"] {
     margin-left: 5px;
 }
+/*
+#containerDefaultAddres {
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+#containerAddresLoja {
+    margin-top: 25px;
+    margin-left: 70px;
+}
+*/

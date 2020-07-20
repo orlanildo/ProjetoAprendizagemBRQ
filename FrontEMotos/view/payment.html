@@ -8,7 +8,7 @@
             <a class="logo" type="logo">E-MOTOS <i class="fas fa-motorcycle"></i></a>
             <div class="header-right">
                 <a href="/view/home">Home</a>
-                <a href="/view/">Exit</a>
+                <a href="/view/">Sair</a>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
     <div ng-hide="esconderForm()" class="container-info">
         <!-- INFORMAÇÕES DO PEDIDO - MOTO E CLIENTE -->
         <!-- TODAS AS INFORMAÇÕES DE ALUGUEL -->
-        <form novalidate name="rentMoto" ng-submit="finish()">
+        <form novalidate class="form-signin" name="rentMoto">
             <div class="conteudo">
                 <!-- INFORMAÇÕES DO PEDIDO - MOTO E CLIENTE -->
                 <div class="jumbotron" style="background-color: #fff;">
@@ -45,7 +45,7 @@
                         <div class="card mb-3 border-light" style="max-width: 600px;">
                             <div class="row no-gutters">
                                 <div class="col-md-5">
-                                    <img src="{{moto.foto}}" class="card-img img-moto" alt="...">
+                                    <img src="{{moto.photoMoto}}" class="card-img img-moto" alt="...">
                                 </div>
                                 <div class="col-md-7" style="padding-left: 20px;">
                                     <div class="card-body">
@@ -65,20 +65,21 @@
                         <div class="additional-options">
                             <h1>Opções adicionais</h1>
                             <div class="row">
-                                <label for="kms" style="margin-right: 10px; margin-left: 15px;">
+                                <label for="rentalOptionByKm" style="margin-right: 10px; margin-left: 15px; margin-top: 10px;">
                                     <b>Opções de aluguel (Por KM):</b>
                                 </label>
-                                <select id="kms" name="kms" class="form-control col-md-3" ng-model="kms" required>
+                                <select id="rentalOptionByKm" ng-model="rent.rentalOptionByKm" name="rentalOptionByKm"
+                                        class="form-control col-md-3" required>
+
                                     <option value="1">20KM | 2 Dias </option>
                                     <option value="2">40KM | 4 Dias </option>
                                     <option value="3">60KM | 6 Dias </option>
                                     <option value="4">80KM | 8 Dias </option>
                                     <option value="5">100KM | 10 Dias</option>
                                 </select>
-
                             </div>
-                            <input ng-model="rentHelmet" id="rentHelmet" name="rentHelmet" type="checkbox">
-                            <label for="rentHelmet">
+                            <input ng-model="rent.helmet" id="helmet" name="helmet" type="checkbox">
+                            <label for="helmet">
                                 <b>Alugar capacete R$20,00</b>
                             </label>
                         </div>
@@ -92,47 +93,83 @@
                 <!-- Container formulários -->
                 <div class="container-fluid">
                     <h1 style="margin-left: 16px;">Endereço (Pegar e Devolver)</h1>
-                    <h4 style="margin-left: 20px;">Informações do usuário</h4>
-                    <!-- Endereço do usuário -->
-                    <div class="col-md-6">
-                        <div class="card border-light">
-                            <div class="card-body">
-                                <b class="card-title">Endereço:</b><br>
-                                {{user.addressUser.street}}, {{user.addressUser.number}}<br>
-                                {{user.addressUser.neighborhood}} - {{user.addressUser.city}} -
-                                {{user.addressUser.state}}
-                                <br> CEP: {{user.addressUser.zipCode}}<br>
-                                <hr>
-                                <input ng-model="pickGarage" id="pickGarage" name="pickGarage" type="checkbox">
-                                <label for="pickGarage">Usar este endereço para receber</label>
-                                <br>
-                                <input ng-model="turnOverGarage" id="turnOverGarage" name="turnOverGarage"
-                                    type="checkbox">
-                                <label for="turnOverGarage">Usar este endereço para entregar</label>
+                    <!-- Endereço -->
+                    <br>
+                    <h5 class="text-danger" ng-show="mensagemReceber.length">{{mensagemReceber}}</h5>
+                    <h5 class="text-danger" ng-show="mensagemEntregar.length">{{mensagemEntregar}}</h5>
+                    <div class="row">
+                        <div class="col-sm-6" >
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-title">Seu Endereço:</b><br>
+                                    {{user.addressUser.street}}, {{user.addressUser.number}}<br>
+                                    {{user.addressUser.neighborhood}} - {{user.addressUser.city}} -
+                                    {{user.addressUser.state}}
+                                    <br> CEP: {{user.addressUser.zipCode}}<br>
+                                    <hr>
+                                    <div ng-hide="addressDefaultPickGarage">
+                                        <input ng-model="myaddressPickGarage" id="myaddressPickGarage" name="myaddressPickGarage" type="checkbox">
+                                        <label for="myaddressPickGarage">Usar seu endereço para receber</label>
+                                    </div>
+                                    <div ng-hide="addressDefaultTurnOverGarage">
+                                        <input ng-model="myaddressTurnOverGarage" id="myaddressTurnOverGarage" name="myaddressTurnOverGarage" type="checkbox">
+                                        <label for="myaddressTurnOverGarage">Usar seu endereço para entregar</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b class="card-title">Endereço da nossa Loja:</b><br>
+                                    {{addressDefault.street}}, {{addressDefault.number}}<br>
+                                    {{addressDefault.neighborhood}} - {{addressDefault.city}} -
+                                    {{addressDefault.state}}
+                                    <br> CEP: {{addressDefault.zipCode}}<br>
+                                    <hr>
+
+                                    <div ng-hide="myaddressPickGarage">
+                                        <input ng-model="addressDefaultPickGarage" id="addressDefaultPickGarage" name="addressDefaultPickGarage" type="checkbox">
+                                        <label for="addressDefaultPickGarage">Retirar na nossa loja</label>
+                                    </div>
+                                    <div ng-hide="myaddressTurnOverGarage">
+                                        <input ng-model="addressDefaultTurnOverGarage" id="addressDefaultTurnOverGarage" name="addressDefaultTurnOverGarage" type="checkbox">
+                                        <label for="addressDefaultTurnOverGarage">Entregar na nossa loja</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <br>
-                    <!-- FIM Endereço do usuário -->
+                    <!-- FIM Endereço -->
 
                     <div class="row">
                         <!-- Formulário para recebimento -->
-                        <div ng-hide="pickGarage" class="col-sm-6">
+                        <div ng-hide="addressDefaultPickGarage || myaddressPickGarage" class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Novo Endereço para Recebimento:</h5>
                                     <div class="row">
-                                        <div class="input-group form-group">
+
+                                        <div class="input-group form-group" >
+                                            <label for="inputZipCodeAddressReceivement" class="sr-only">Cep</label>
+                                            <input type="zipCode" name="zipCodeAddressReceivement" id="inputZipCodeAddressReceivement" class="form-control" placeholder="CEP" 
+                                            autofocus ng-model="addressReceivement.zipCode" ng-minlength="8" ng-maxlength="8" ng-required="true">
+                                            
+                                            <span class="input-group-btn" style="margin-top: 6px; margin-right: 5px;">
+                                                <a class="btn btn-outline-primary" 
+                                                    ng-click="findZipCode(addressReceivement.zipCode, 'addressReceivement')">Validar CEP</a>
+                                            </span>
+                                        </div>
+
+                                        <div class="input-group form-group" style="margin-top: -15px;">
                                             <input type="street" id="inputStreet" class="form-control col-md-9"
                                                 placeholder="Rua" ng-model="addressReceivement.street">
-                                            <input type="text" id="inputNumber" class="form-control col-md-3"
+                                            <input type="number" id="inputNumber" class="form-control col-md-3"
                                                 placeholder="Nº" ng-model="addressReceivement.number">
                                         </div>
-                                        <div class="input-group form-group" style="margin-top: -15px;">
-                                            <label for="inputZipCode" class="sr-only">CEP</label>
-                                            <input type="zipcode" id="inputZipCode" class="form-control col-md-4"
-                                                placeholder="CEP" ng-model="addressReceivement.zipcode">
-                                            <label for="inputNeighborhood" class="sr-only">Bairro</label>
+                                        <div class="input-group form-group" style="margin-top: -15px; margin-right: 10;">
                                             <input type="neighborhood" id="inputNeighborhood" class="form-control"
                                                 placeholder="Bairro" ng-model="addressReceivement.neighborhood">
                                         </div>
@@ -156,25 +193,31 @@
                         <!--Formulário para recebimento -->
 
                         <!-- Formulário para entrega -->
-                        <div ng-hide="turnOverGarage" class="col-sm-6">
+                        <div ng-hide="addressDefaultTurnOverGarage || myaddressTurnOverGarage" class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Novo Endereço para retirada:</h5>
                                     <div class="row">
+
                                         <div class="input-group form-group">
+                                            <label for="inputZipCodeAddressRemoval" class="sr-only">Cep</label>
+                                            <input type="zipCode" name="zipCodeAddressRemoval" id="inputZipCodeAddressRemoval" class="form-control" placeholder="CEP" 
+                                            autofocus ng-model="addressRemoval.zipCode" ng-minlength="8" ng-maxlength="8" ng-required="true">
+                                            
+                                            <span class="input-group-btn" style="margin-top: 6px; margin-right: 5px;">
+                                                <a class="btn btn-outline-primary" 
+                                                    ng-click="findZipCode(addressRemoval.zipCode, 'addressRemoval')">Validar CEP</a>
+                                            </span>
+                                        </div>
+
+                                        <div class="input-group form-group" style="margin-top: -15px;">
                                             <input type="street" id="inputStreetAddressRemoval"
-                                                class="form-control col-md-9" placeholder="Rua"
-                                                ng-model="addressRemoval.street">
-                                            <input type="text" id="inputNumberAddressRemoval"
+                                                class="form-control col-md-9" placeholder="Rua" ng-model="addressRemoval.street">
+                                            <input type="number" id="inputNumberAddressRemoval"
                                                 class="form-control col-md-3" placeholder="Nº"
                                                 ng-model="addressRemoval.number">
                                         </div>
                                         <div class="input-group form-group" style="margin-top: -15px;">
-                                            <label for="inputZipCode" class="sr-only">CEP</label>
-                                            <input type="zipcode" id="inputZipCodeAddressRemoval"
-                                                class="form-control col-md-4" placeholder="CEP"
-                                                ng-model="addressRemoval.zipcode">
-                                            <label for="inputNeighborhood" class="sr-only">Bairro</label>
                                             <input type="neighborhood" id="inputNeighborhoodAddressRemoval"
                                                 class="form-control" placeholder="Bairro"
                                                 ng-model="addressRemoval.neighborhood">
@@ -208,33 +251,34 @@
                 <!-- FORMA DE PAGAMENTO -->
                 <div class="jumbotron" style="background-color: white;">
                     <h1>Adicionar cartão</h1>
+                    <h5 class="text-danger" ng-show="mensagemCartao.length">{{mensagemCartao}}</h5>
                     <div class="form-group">
                         <h4>Dados do cartão</h4>
                         <!-- Informações do cartão -->
                         <div class="col-md-6-offset-2 container-pagamento">
                             <label for="inputCardHolder" class="sr-only">Nome do Títular</label>
                             <input type="text" id="inputCardHolder" class="form-control" placeholder="Nome do Títular"
-                                ng-model="creditCard.cardHolder" required>
+                                ng-model="creditCard.cardHolder" ng-required="true">
 
                             <label for="inputCpfHolder" class="sr-only">CPF</label>
                             <input type="cpf" id="inputCpfHolder" class="form-control" placeholder="CPF"
-                                ng-model="creditCard.cpfHolder" required>
+                                ng-model="creditCard.cpfHolder" ng-required="true">
 
                             <label for="inputCardNumber" class="sr-only">Número do Cartão</label>
                             <input type="cardNumber" id="inputCardNumber" class="form-control"
-                                placeholder="Número do cartão" ng-model="creditCard.cardNumber" required>
+                                placeholder="Número do cartão" ng-model="creditCard.cardNumber" ng-required="true">
 
                             <div class="input-group form-group">
                                 <label for="inputCVV" class="sr-only">Código de Segurança</label>
                                 <input type="cvv" id="inputCVV" class="form-control col-md-3" placeholder="CCV"
-                                    ng-model="creditCard.cvv" required>
+                                    ng-model="creditCard.cvv" ng-required="true">
                                 <label for="inputDueDate" class="sr-only">Data de Vencimento</label>
                                 <input type="dueDate" id="inputDueDate" class="form-control" placeholder="Vencimento"
-                                    ng-model="creditCard.dueDate" required>
+                                    ng-model="creditCard.dueDate" ng-required="true">
 
                                 <label for="inputFlag" class="sr-only">Bandeira do cartão</label>
                                 <select type="flag" id="inputFlag" class="form-control col-md-4" placeholder="Bandeira"
-                                    ng-model="creditCard.flag" required>
+                                    ng-model="creditCard.flag" ng-required="true">
                                     <option>MasterCard</option>
                                     <option>Visa</option>
                                     <option>Elo</option>
@@ -242,7 +286,7 @@
                                 </select>
                             </div>
                             <div class="btn-cartao">
-                                <button type="submit" class="btn btn-primary">Finalizar Pedido</button>
+                                <button ng-click="criarRent()" class="btn btn-primary" data-toggle="modal" data-target="#confirmar">Finalizar Pedido</button>
                                 <a href="/view/home" class="btn btn-primary"> Cancelar</a>
                             </div>
                         </div>
@@ -254,6 +298,44 @@
         </form>
     </div>
     <!-- TODAS AS INFORMAÇÕES DE ALUGUEL -->
+</div>
+
+<!-- Modal Confirmação Pedido -->
+<div class="modal fade" id="confirmar">
+    <div class="modal-dialog border-light">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Finalizar Pedido</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body alert">
+                <h4>Estamos quase lá, <b style="color: black; font-size: 22px;">{{user.name}}</b>. Confirme os dados informados e seu pedido será finalizado!</h4>
+
+                <h5>Dados da Moto: </h5>
+                <p><b>Nome: </b>{{moto.name}} - <b>Marca: </b>{{moto.brand}}</p>
+
+                <h5>Endereço de Recebimento: </h5>
+                <p ng-hide="mensagemReceber.length"><b>End: </b>{{rent.addressReceivementId.street}}, {{rent.addressReceivementId.number}} - {{rent.addressReceivementId.neighborhood}} - {{rent.addressReceivementId.city}}</p>
+                <p class="text-danger" ng-show="mensagemReceber.length">{{mensagemReceber}}</p>
+
+                <h5>Endereço de Devolução: </h5>
+                <p ng-hide="mensagemEntregar.length"><b>End: </b>{{rent.addressRemovalId.street}}, {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.neighborhood}} - {{rent.addressRemovalId.city}}</p>
+                <p class="text-danger" ng-show="mensagemEntregar.length">{{mensagemEntregar}}</p>
+
+                <h5>Dados do Cartão de Crédito: </h5>
+                <p ng-hide="mensagemCartao.length"><b>Titular Cartão: </b>{{rent.creditCardRentId.cardHolder}} | <b>Nº Cartão:</b> {{rent.creditCardRentId.cardNumber}} | <b>Bandeira:</b> {{rent.creditCardRentId.flag}}</p>
+                <p class="text-danger" ng-show="mensagemCartao.length">{{mensagemCartao}}</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button ng-click="finish()" type="submit" 
+                    class="btn btn-outline-success" data-dismiss="modal">Confirmar</button>
+                <button ng-click="limparFormulario()" type="button" class="btn btn-outline-dark" 
+                    data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Rodapé -->

@@ -7,10 +7,10 @@
         <div id="container">
             <a class="logo" type="logo">E-MOTOS <i class="fas fa-motorcycle"></i></a>
             <div class="header-right">
-                <a href="#contact">Contact</a>
-                <a ng-hide="userClient(user.type)" ng-click="limparFormulario()" href="#addMore" data-toggle="modal" data-target="#addMore">Add
-					more</a>
-                <a href="/view/">Exit</a>
+                <a ng-hide="userClient(user.type)" ng-click="goToListRent()" href="/view/listRent">Lista de Contratos</a>
+                <a href="#contact">Contatos</a>
+                <a ng-hide="userClient(user.type)" ng-click="limparFormulario()" href="#addMore" data-toggle="modal" data-target="#addMore">Adicionar mais</a>
+                <a href="/view/">Sair</a>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
 <div class="jumbotron">
     <!-- CONTRATOS ATIVOS, MOSTRAR APENAS SE TIVER! -->
     <div ng-show="userRented(user.statusRentUser)" class="container-rent text-center">
-        <h1 style="font-size: 35px; color: green; margin-bottom: 10px;">Contrato ativo</h1>
+        <h1 style="font-size: 35px; color: green; margin-bottom: 10px;">Contrato Ativo</h1>
         <hr>
         <p><strong>Moto: </strong> {{rent.motoRentId.name}} - {{rent.motoRentId.model}}</p>
         <p><strong>Protocolo: </strong> {{rent.protocol}}</p>
@@ -27,7 +27,7 @@
         <p><strong>Endereço para devolver a moto: </strong> {{rent.addressRemovalId.street}}, {{rent.addressRemovalId.number}} - {{rent.addressRemovalId.city}}</p>
         <p><strong>Valor total: </strong> {{rent.finalPrice | currency: "R$"}}</p>
 
-        <button ng-click="devolverMoto(rent)" class="btn btn-primary btn-devolver">Devolver moto</button>
+        <!-- <button ng-click="devolverMoto(rent)" class="btn btn-primary btn-devolver">Devolver moto</button> -->
     </div>
 
     <!-- CONTEUDO 1 - POR QUE A E-MOTOS -->
@@ -54,9 +54,9 @@
                 <p>Os preços mais acessíveis para que você consiga garantir uma moto pro dia-a-dia.</p>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
+
+        <br> <br> <br>
+
         <div class="row">
             <div class="col-md-4">
                 <span class="far fa-thumbs-up" style="font-size: 40px; color: #428bca;"></span>
@@ -109,7 +109,7 @@
         <div class="row">
             <div class="card info" ng-repeat="moto in motos | filter: filtro" ng-hide="esconderMoto(moto.statusRent)">
                 <div class="card-img-top" alt="Card image" style="width:100%">
-                    <img src="{{moto.foto}}" class="img-thumbnail mx-auto d-block" style="border: 0;">
+                    <img src="{{moto.photoMoto}}" class="img-thumbnail mx-auto d-block" style="border: 0;">
                 </div>
                 <div class="card-body">
                     <h4 class="card-title" style="color: #428bca; border-bottom: #428bca 2px solid; border-bottom-width: auto;">
@@ -124,7 +124,7 @@
                 <div>
                     <button ng-click="goToPayment(moto)" ng-disabled="userRented(user.statusRentUser)" type="submit" class="btn btn-outline-primary">Alugue</button>
                     <button ng-click="marcarMotoAlterar(moto)" ng-hide="userClient(user.type)" id="alterarMoto" class="btn btn-outline-primary" data-toggle="modal" data-target="#addMore">Alterar</button>
-                    <button ng-click="deleteMoto(moto)" ng-hide="userClient(user.type)" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteMoto">Excluir</button>
+                    <button ng-click="marcarDeleteMoto(moto)" ng-hide="userClient(user.type)" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmar">Excluir</button>
                 </div>
             </div>
         </div>
@@ -137,58 +137,112 @@
             <form class="form-signin" name="formMoto">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Adicionar moto</h4>
+                        <h4 class="modal-title">{{tituloModal}} moto</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
+                        <label for="inputLicensePlate" class="sr-only">Placa</label>
+                        <input type="text" name="licensePlate" id="inputLicensePlate" class="form-control" 
+                            placeholder="Placa" ng-model="moto.licensePlate" ng-required="true">
+                        
+                        <label for="inputDisplacement" class="sr-only">Cilindrada</label>
+                        <input type="text" name="displacement" id="inputDisplacement" class="form-control" 
+                            placeholder="Cilindrada" ng-model="moto.displacement" ng-required="true">
+
                         <label for="inputBrand" class="sr-only">Marca</label>
-                        <input type="text" name="brand" id="inputBrand" class="form-control" placeholder="Marca" ng-model="moto.brand" ng-required="true">
+                        <input type="text" name="brand" id="inputBrand" class="form-control"
+                            placeholder="Marca" ng-model="moto.brand" ng-required="true">
 
                         <label for="inputName" class="sr-only">Nome</label>
-                        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" ng-model="moto.name" ng-required="true">
+                        <input type="text" name="name" id="inputName" class="form-control" 
+                            placeholder="Name" ng-model="moto.name" ng-required="true">
 
                         <label for="inputModal" class="sr-only">Modelo</label>
-                        <input type="text" name="model" id="inputModal" class="form-control" placeholder="Modelo" ng-model="moto.model" ng-required="true">
+                        <input type="text" name="model" id="inputModal" class="form-control" 
+                            placeholder="Modelo" ng-model="moto.model" ng-required="true">
 
                         <label for="inputYear" class="sr-only">Ano</label>
-                        <input type="text" name="year" id="inputYear" class="form-control" placeholder="Ano" ng-model="moto.year" ng-required="true">
+                        <input type="text" name="year" id="inputYear" class="form-control" 
+                            placeholder="Ano" ng-model="moto.year" ng-required="true">
 
                         <label for="inputPricePerKm" class="sr-only">Preço</label>
-                        <input type="text" name="pricePerKm" id="inputPricePerKm" class="form-control" placeholder="Preço para cada 20KM" ng-model="moto.pricePerKm" ng-required="true">
+                        <input type="text" name="pricePerKm" id="inputPricePerKm" class="form-control" 
+                            placeholder="Preço para cada 10KM" ng-model="moto.pricePerKm" ng-required="true">
 
                         <label for="inputKm" class="sr-only">KM</label>
-                        <input type="text" name="km" id="inputKm" class="form-control" placeholder="Kms rodados" ng-model="moto.km" ng-required="true">
+                        <input type="text" name="km" id="inputKm" class="form-control" placeholder="Kms rodados" 
+                            ng-model="moto.km" ng-required="true">
 
                         <label for="InputDescription" class="sr-only">Descrição</label>
-                        <textarea type="text" name="description" id="InputDescription" class="form-control" placeholder="Descrição" ng-model="moto.description"></textarea>
+                        <textarea type="text" name="description" id="InputDescription" class="form-control" 
+                            placeholder="Descrição" ng-model="moto.description"></textarea>
 
-                        <label for="foto" class="sr-only">Ano</label>
-                        <input type="url" name="foto" id="inputFoto" class="form-control" placeholder="Url da foto" ng-model="moto.foto" ng-required="true">
+                        <label for="photoMoto" class="sr-only">Ano</label>
+                        <input type="url" name="photoMoto" id="inputPhotoMoto" class="form-control" 
+                            placeholder="Url da foto" ng-model="moto.photoMoto" ng-required="true">
                     </div>
                     <div class="modal-footer">
-                        <button ng-disabled="formMoto.$invalid" ng-click="createMoto(moto)" type="submit" class="btn btn-dark" data-dismiss="modal">Salvar</button>
-                        <button ng-click="limparFormulario()" type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
+                        <button ng-if="opc == 1" ng-disabled="formMoto.$invalid" type="submit" ng-click="createMoto(moto)"
+                            class="btn btn-dark" data-dismiss="modal" data-toggle="modal" data-target="#mensagemModal">Cadastrar</button>
+                        <button ng-if="opc == 2" ng-disabled="formMoto.$invalid" type="submit"
+                            class="btn btn-dark" data-dismiss="modal" data-toggle="modal" data-target="#confirmar">Salvar</button>
+                        <button ng-click="limparFormulario()" type="button" class="btn btn-danger" 
+                            data-dismiss="modal">Sair</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Modal Excluir Motos -->
-    <div class="modal fade" id="deleteMoto">
+    <!-- Modal Confirmação Motos (ALTERAR | EXCLUIR) -->
+    <div class="modal fade" id="confirmar">
         <div class="modal-dialog border-light">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{removerTitulo}}</h4>
+                    <h4 class="modal-title">{{tituloModalConfirmar}}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 
-                <div ng-show="mensagemRemoverFalha.length" class="modal-body alert">
-                    <h4 style="color: red; font-size: 25px; padding: 20px;">{{mensagemRemoverFalha}}</h4>
+                <div ng-show="motoR.name.length" class="modal-body alert">
+                    <h4 style="color: red; margin-top: 15px; font-size: 25px; padding: 5px;">Deletar {{motoR.name}}?</h4>
                 </div>
-                <div ng-show="mensagemRemoverSucesso.length" class="modal-body alert">
-                    <h4 style="color: green; font-size: 25px; padding: 20px;">{{mensagemRemoverSucesso}}</h4>
-                </div>    
+
+                <div ng-show="moto.name.length" class="modal-body alert">
+                    <h4 style="font-size: 25px; margin-top: 15px; padding: 5px;">Alterar {{moto.name}}?</h4>
+                </div>
+                
+                <div class="modal-footer">
+                    <button ng-show="moto.name.length" ng-click="updateMoto(moto)" type="submit" 
+                        class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#mensagemModal">Confirmar</button>
+                    <button ng-show="motoR.name.length" ng-click="deleteMoto(motoR)" type="submit" 
+                        class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#mensagemModal">Excluir</button>
+                    <button ng-click="limparFormulario()" type="button" class="btn btn-dark" 
+                        data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Mensagem Moto (ALTERAR | EXCLUIR | CADASTRAR) -->
+    <div class="modal fade" id="mensagemModal">
+        <div class="modal-dialog border-light">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{mensagemTitulo}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <div ng-show="mensageFalha.length" class="modal-body alert">
+                    <h4 style="color: red; margin-top: 15px; font-size: 25px; padding: 5px;">{{mensagemFalha}}</h4>
+                </div>
+                <div ng-show="mensagemSucesso.length" class="modal-body alert">
+                    <h4 style="color: green; margin-top: 15px; font-size: 25px; padding: 5px;">{{mensagemSucesso}}</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button ng-click="limparFormulario()" type="button" class="btn btn-outline-dark" 
+                        data-dismiss="modal">Fechar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -201,8 +255,11 @@
             <div class="row">
                 <div class="container">
                     <h3>SOBRE O E-MOTOS:</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus dui id lacus sagittis interdum. Aliquam a faucibus nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque ipsum
-                        nulla, ultricies vitae aliquet ut, consectetur non nunc.. </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent 
+                        dapibus dui id lacus sagittis interdum. Aliquam a faucibus nisi. 
+                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices 
+                        posuere cubilia curae; Quisque ipsum nulla, ultricies vitae 
+                        aliquet ut, consectetur non nunc.. </p>
                 </div>
                 <div class="container" id="contact">
                     <div class="icon-bar">

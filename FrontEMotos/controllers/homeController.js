@@ -1,148 +1,157 @@
-angular.module('app').controller('homeController', function($scope, $http, $location, $rootScope) {
+angular.module('app').controller('homeController',
+    function ($scope, $http, $location, $rootScope, $window) {
 
-    // isso é um thw wai databind basta prenchelo 
-    // com os dados da api que será refletido ba tela 
-    $scope.user = $rootScope.user;
-    $scope.rent = {};
-    $scope.motos = {};
-    $scope.moto = '';
-    $scope.filtro = '';
-    $scope.mensagemRemoverSucesso = '';
-    $scope.mensagemRemoverFalha = '';
-    $scope.removerTitulo = '';
+        $scope.user = {};
+        $scope.rent = {};
+        $scope.motos = {};
+        $scope.moto = '';
+        $scope.motoR = '';
+        $scope.opc = 1;
+        $scope.tituloModal = 'Cadastrar';
+        $scope.tituloModalConfirmar = '';
+        $scope.filtro = '';
 
-    // ------ REDIRECIONAMENTOS POR BOTÕES ------ //
-    $scope.goToLogin = function() {
-        $location.path("/view/")
-    }
+        // ------------ REQUISIÇÕES PARA TRAZER LISTAS E ITENS ESPECÍFICOS ------------- //
 
-    $scope.goToPayment = function(moto) {
-        console.log("goToPayment" + moto)
-        $rootScope.selectedMoto = moto;
-        $location.path("/view/payment")
-    }
+        const token = $window.localStorage.getItem('token')
+        $http.defaults.headers.common["Authorization"] = token;
 
-    // ------ VALIDAÇÕES PARA ESCONDER E MOSTRAR DETERMINADAS COISAS ------ //
-    $scope.esconderMoto = function(motoRent) {
-        if (motoRent == 'rent') {
-            return true;
-        } else {
-            return false;
+        $http.get('http://localhost:8080/user/showUser/' + $rootScope.user.id)
+            .then(function (res) { $scope.user = res.data;  /*console.log($scope.user) */ })
+            .catch(function (erro) { console.log(erro); })
+
+        $http.get('http://localhost:8080/moto/listMotos')
+            .then(function (res) { $scope.motos = res.data; })
+            .catch(function (erro) { console.log(erro); })
+
+        $http.get('http://localhost:8080/rent/showRent')
+            .then(function (res) { $scope.rent = res.data; })
+            .catch(function (erro) { /* console.log(erro); */ })
+
+        $scope.devolverMoto = function (rent) {
+            $http.post('http://localhost:8080/devolverMoto/', rent)
+                .then(function (res) {
+                    console.log(res)
+                })
+                .catch(function (erro) {
+                    console.log(erro)
+                });
         }
-    }
 
-    $scope.userRented = function(userRent) {
-        if (userRent == 'rented') {
-            return true;
-        } else {
-            return false;
+        // ------ REDIRECIONAMENTOS POR BOTÕES ------ //
+        $scope.goToPayment = function (moto) {
+            $rootScope.selectedMoto = moto;
+            $location.path("/view/payment")
         }
-    }
 
-    $scope.userClient = function(userType) {
-        if (userType == 'client') {
-            return true;
-        } else {
-            return false;
+        $scope.goToListRent = function () {
+            $location.path("/view/listRent")
         }
-    }
 
-    $scope.marcarMotoAlterar = function(motoAlterar){
-        $scope.moto = motoAlterar;
-    }
+        // ------ VALIDAÇÕES PARA ESCONDER E MOSTRAR DETERMINADAS COISAS ------ //
+        $scope.esconderMoto = function (statusRent) { return statusRent; }
 
-    $scope.limparFormulario = function(){
-        delete $scope.moto;
-        $scope.formMoto.$setPristine();
-    }
+        $scope.userRented = function (statusRentUser) { return statusRentUser; }
 
-    // ------------ REQUISIÇÕES PARA TRAZER LISTAS E ITENS ESPECÍFICOS ------------- //
-    $http.get('http://localhost:8080/showRent/' + $scope.user.id).then(function(res) {
-            $scope.rent = res.data;
-        })
-        .catch(function(erro) {
-            console.log(erro);
-        })
+        $scope.userClient = function (userType) {
+            if (userType == 'client') return true;
+            else return false;
+        }
 
-        $http.get('http://localhost:8080/moto/listMotos').then(function(res) {
-            $scope.motos = res.data;
-        })
-        .catch(function(erro) {
-            console.log(erro);
-        });
+        $scope.marcarMotoAlterar = function (motoAlterar) {
+            $scope.moto = motoAlterar;
+            $scope.opc = 2;
+            $scope.tituloModal = 'Alterar';
+            $scope.tituloModalConfirmar = 'Realmente deseja alterar está moto?';
+        }
 
-    $scope.devolverMoto = function(rent){
-        $http.post('http://localhost:8080/devolverMoto/', rent)
-        .then(function(res){
-            console.log(res)
-        })
-        .catch(function(erro){
-            console.log(erro)
-        });
-    }
+        $scope.marcarDeleteMoto = function (motoRemover) {
+            $scope.motoR = motoRemover;
+            $scope.tituloModalConfirmar = 'Realmente deseja remover está moto?';
+        }
 
-    // ------------ CRUDS ------------- //
-    $scope.createMoto = function() {
-        $http.post('http://localhost:8080/moto/createMoto', $scope.moto).then(function(res) {
-            if(res.status == 200){
-                delete $scope.moto;
-                $scope.formMoto.$setPristine();
+        $scope.limparFormulario = function () {
+            delete $scope.moto;
+            delete $scope.motoR;
+            $scope.formMoto.$setPristine();
+            $scope.opc = 1;
+            $scope.tituloModal = 'Cadastrar';
+        }
 
-                $http.get('http://localhost:8080/moto/listMotos').then(function(res) {
-                        $scope.motos = res.data;
-                    })
-                    .catch(function(erro) {
-                        console.log(erro);
-                    })
-            }  
-        }, function(res) {
-            console.log(res.data)
-            console.log(res.status)
-        })
-    }
+        // ------------ CRUDS ------------- //
+        $scope.createMoto = function (moto) {
+            $scope.mensagemTitulo = '';
+            $scope.mensagemSucesso = '';
+            $scope.mensagemFalha = '';
+            // $scope.moto.pricePerKm = $scope.moto.pricePerKm.replace(",", ".")
 
-    $scope.deleteMoto = function(moto) {
-        $scope.removerTitulo = '';
-        $scope.mensagemRemoverSucesso = '';
-        $scope.mensagemRemoverFalha = '';
-        
-        $http.delete('http://localhost:8080/moto/deleteMoto/' + moto.id)
-            .then(function(response) {
-                $scope.removerTitulo = 'Sucesso'
-                $scope.mensagemRemoverSucesso = 'Moto ' + moto.name + ' foi removida!';
+            $http.post('http://localhost:8080/moto/createMoto', $scope.moto).then(function (res) {
+                if (res.status == 200) {
 
-                $http.get('http://localhost:8080/moto/listMotos').then(function(res) {
-                        $scope.motos = res.data;
-                    })
-                    .catch(function(erro) {
-                        console.log(erro);
-                    })
-                
+                    $http.get('http://localhost:8080/moto/listMotos')
+                        .then(function (res) { $scope.motos = res.data; })
+                        .catch(function (erro) { console.log(erro); });
+
+                    $scope.mensagemTitulo = 'Sucesso'
+                    $scope.mensagemSucesso = 'Moto ' + moto.name + ' foi cadastrada!';
+                    delete $scope.moto;
+                    $scope.formMoto.$setPristine();
+                }
+            }, function (erro) {
+                console.log(erro)
+                $scope.mensagemTitulo = 'Falha'
+                $scope.mensagemFalha = 'Não foi possível alterar a moto ' + moto.name;
             })
-            .catch(function(erro) {
-                console.log(erro);
-                $scope.removerTitulo = 'Falha'
-                $scope.mensagemRemoverFalha = 'Não foi possível remover a moto ' + moto.name;
-            });
-    }
+        }
 
-    // $scope.updateMoto = function () {
-    //     $http.post('/client/id').then(function (res) {
-    //         console.log(res.data)
-    //         console.log(res.status)
-    //     }, function (res) {
-    //         console.log(res.data)
-    //         console.log(res.status)
-    //     })
-    // }
+        $scope.deleteMoto = function (moto) {
+            $scope.mensagemTitulo = '';
+            $scope.mensagemSucesso = '';
+            $scope.mensagemFalha = '';
 
+            $http.delete('http://localhost:8080/moto/deleteMoto/' + moto.id)
+                .then(function (response) {
+                    $scope.mensagemTitulo = 'Sucesso'
+                    $scope.mensagemSucesso = 'Moto ' + moto.name + ' foi removida!';
 
-    // ----- ANTIGA FORMA DE APAGAR SESSÃO A PARTIR DA HOME ----- //
-    $scope.sair = function() {
-        $http.get('http://localhost:8080/sair').then(function(res) {
-            $scope.user = res.data;
-            $location.path("/view/")
-        })
-    }
+                    $http.get('http://localhost:8080/moto/listMotos')
+                        .then(function (res) { $scope.motos = res.data; })
+                        .catch(function (erro) { console.log(erro); })
+                })
+                .catch(function (erro) {
+                    console.log(erro);
+                    $scope.mensagemTitulo = 'Falha'
+                    $scope.mensagemFalha = 'Não foi possível remover a moto ' + moto.name;
+                });
+        }
 
-})
+        $scope.updateMoto = function (moto) {
+            $http.put('http://localhost:8080/moto/updateMoto/' + moto.id, moto)
+            .then(function (res) {
+                if (res.status == 200) {
+
+                    $http.get('http://localhost:8080/moto/listMotos')
+                        .then(function (res) { $scope.motos = res.data; })
+                        .catch(function (erro) { console.log(erro); });
+
+                    $scope.mensagemTitulo = 'Sucesso'
+                    $scope.mensagemSucesso = 'Moto ' + moto.name + ' foi alterada!';
+                    delete $scope.moto;
+                    $scope.formMoto.$setPristine();
+                }
+            }, function (res) {
+                console.log(res.data)
+                console.log(res.status)
+            })
+        }
+
+        $scope.sair = function () {
+            $http.get('http://localhost:8080/logout').then(function (res) {
+                if (res.$http.status == 200) {
+                    $scope.user = res.data;
+                    $location.path("/view/")
+                }
+            })
+        }
+
+    })
