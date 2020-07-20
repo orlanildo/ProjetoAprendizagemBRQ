@@ -62,13 +62,12 @@ public class User implements Serializable {
 	
 	public User() {}
 	
-	public User(int id, @NotBlank(message = "{name.not.blank}") String name,
+	public User(@NotBlank(message = "{name.not.blank}") String name,
 			@Email(message = "{email.not.valid}") @NotBlank(message = "{email.not.blank}") String email,
 			@NotBlank String cpf, @NotBlank String cnh, @NotBlank(message = "{senha.not.blank}")
-			String password, @NotBlank String cellPhone, @NotBlank String type,
-			boolean statusRentUser, Address addressUser, String rentProtocol) {
+			String password, @NotBlank String cellPhone, @NotBlank String type, Address addressUser) {
 		
-		this.id = id;
+		//this.id = id;
 		this.name = name;
 		this.email = email;
 		//this.birthDate = birthDate;
@@ -77,9 +76,9 @@ public class User implements Serializable {
 		this.password = password;
 		this.cellPhone = cellPhone;
 		this.type = type;
-		this.statusRentUser = statusRentUser;
+		//this.statusRentUser = statusRentUser;
 		this.addressUser = addressUser;
-		this.rentProtocol = rentProtocol;
+		//this.rentProtocol = rentProtocol;
 	}
 
 

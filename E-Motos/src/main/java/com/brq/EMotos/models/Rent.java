@@ -54,9 +54,9 @@ public class Rent implements Serializable {
 	
 	public Rent() {}
 	
-	public Rent(boolean helmet, int rentalOptionByKm, long finalPrice, boolean pickGarage,
-			boolean turnOverGarage, User userRentId, Moto motoRentId, CreditCard creditCardRentId,
-			Address addressReceivementId, Address addressRemovalId) {
+	public Rent(boolean helmet, int rentalOptionByKm, long finalPrice, 
+		boolean pickGarage, boolean turnOverGarage, User userRentId,
+		Moto motoRentId, CreditCard creditCardRentId) {
 		
 		this.helmet = helmet;
 		this.rentalOptionByKm = rentalOptionByKm;
@@ -66,8 +66,8 @@ public class Rent implements Serializable {
 		this.userRentId = userRentId;
 		this.motoRentId = motoRentId;
 		this.creditCardRentId = creditCardRentId;
-		this.addressReceivementId = addressReceivementId;
-		this.addressRemovalId = addressRemovalId;
+		//this.addressReceivementId = addressReceivementId;
+		//this.addressRemovalId = addressRemovalId;
 	}
 
 	

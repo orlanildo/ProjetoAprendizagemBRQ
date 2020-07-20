@@ -42,7 +42,7 @@ public class RentController {
 	
 	@GetMapping("/releaseRent/{id}")
     public ResponseEntity<?> releaseRent(@PathVariable int id) {
-		Rent releaseRent = rentService.releaseContract(id);
+		Rent releaseRent = rentService.releaseRent(id);
 		if(releaseRent != null) 
 			return ResponseEntity.ok(releaseRent);
 		else

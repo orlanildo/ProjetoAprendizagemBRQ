@@ -51,7 +51,7 @@ public class RentService {
     		return (long) (pricePerKm * rentalOptionByKm);
     }
     
-	public Rent releaseContract(int idRent) {
+	public Rent releaseRent(int idRent) {
 		if(idRent > 0) {
 			Rent rentFinded = rr.findById(idRent);
 			User userFinded = userService.findUserById(rentFinded.getUserRentId().getId());
@@ -60,6 +60,7 @@ public class RentService {
 			if(rentFinded != null || userFinded != null || motoFinded != null) {
 
 				userFinded.setStatusRentUser(false);
+				userFinded.setRentProtocol(null);
 				userService.updateUser(userFinded.getId(), userFinded);
 				
 				motoFinded.setStatusRent(false);
@@ -145,6 +146,16 @@ public class RentService {
         userService.updateUser(userFinded.getId(), userFinded);
         
         return rr.save(rent);
+	}
+	
+	public String deleteRent(int idRent) {
+		Rent rentReleased = releaseRent(idRent);
+		if(rentReleased != null) {
+			rr.delete(rentReleased);
+			return "deleted!";
+		}else {
+			return null;
+		}
 	}
 	
 }

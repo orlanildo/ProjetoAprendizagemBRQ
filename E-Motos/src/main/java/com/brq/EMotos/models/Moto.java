@@ -47,11 +47,11 @@ public class Moto implements Serializable {
 	
 	public Moto() {}
 	
-	public Moto(int id, String name, String brand, String model, String licensePlate,
-			long displacement, String year, long km, String description, float pricePerKm, String photoMoto,
-			@NotBlank boolean statusRent) {
+	public Moto(String name, String brand, String model, String licensePlate,
+			long displacement, String year, long km, String description, 
+			float pricePerKm, String photoMoto) {
 		
-		this.id = id;
+		//this.id = id;
 		this.name = name;
 		this.brand = brand;
 		this.model = model;
@@ -63,7 +63,7 @@ public class Moto implements Serializable {
 		this.description = description;
 		this.pricePerKm = pricePerKm;
 		this.photoMoto = photoMoto;
-		this.statusRent = statusRent;
+		//this.statusRent = statusRent;
 	}
 
 	// Gatters ans Setter

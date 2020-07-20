@@ -30,13 +30,13 @@ public class Address implements Serializable {
 	private String street;
 	
 	private String complement;
-
+	
 	
 	public Address() {}
-	
-	public Address(String zipCode, String neighborhood, long number, String city, 
+
+	public Address(String zipCode, String neighborhood, long number, String city,
 			String state, String street, String complement) {
-		
+		//this.id = id;
 		this.zipCode = zipCode;
 		this.neighborhood = neighborhood;
 		this.number = number;

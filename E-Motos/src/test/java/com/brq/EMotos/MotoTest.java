@@ -19,6 +19,8 @@ import com.brq.EMotos.services.MotoService;
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 class MotoTest {
+	
+	public static Moto motoCreated;
 
 	@Autowired
 	//@InjectMocks
@@ -28,49 +30,50 @@ class MotoTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
 	
-	@Test
-	void testFindByIdMoto() throws Exception {
-        Moto motoFinded = motoService.findMotoById(1);
-        
-        Assertions.assertThat(motoFinded.getId()).isEqualTo(1);
-		Assertions.assertThat(motoFinded.getName()).isEqualTo("biz");
-		Assertions.assertThat(motoFinded.getLicensePlate()).isEqualTo("4321sp");
-	}
-
-	@Test
-	void testFindAllUser() throws Exception {
-		List<Moto> listMoto =  (List<Moto>) motoService.findAllMoto();
+	@Test //CreateUser
+	void test01() throws Exception {
 		
-		Assertions.assertThat(listMoto != null);
-	}
-	
-	@Test
-	void testCreateUser() throws Exception {
-		Moto motoPrenchido = new Moto(100, "Moto Test Name", "testBrand", "testModel",
-			"testVersion", 20, "testYears", 1234, "testDescription", 50, "testPhotoMoto", false);
+		Moto motoPrenchido = new Moto("Moto Test Name", "testBrand", "testModel",
+			"testLicensePlate", 20, "testYears", 1234, "testDescription", 50, "testPhotoMoto");
 		
-		Moto motoCreated = motoService.createMoto(motoPrenchido);
+		motoCreated = motoService.createMoto(motoPrenchido);
 		
 		Assertions.assertThat(motoCreated.getId()).isNotNull();
 		Assertions.assertThat(motoCreated.getName()).isEqualTo("Moto Test Name");
 		Assertions.assertThat(motoCreated.getBrand()).isEqualTo("testBrand");
 	}
 	
-	@Test
-    public void testUpdateUser() throws Exception {
-		Moto motoPrenchido = new Moto(32, "Moto Test Name", "testBrand", "testModel",
-			"testVersion", 20, "testYears", 1234, "testDescription", 50, "testPhotoMoto", false);
+	@Test //FindAllUser
+	void test02() throws Exception {
+		List<Moto> listMoto =  (List<Moto>) motoService.findAllMoto();
+		
+		Assertions.assertThat(listMoto != null);
+	}
+	
+	@Test //FindByIdMoto
+	void test03() throws Exception {
+        Moto motoFinded = motoService.findMotoById(motoCreated.getId());
         
-        Moto motoUpdeted = motoService.updateMoto(32, motoPrenchido);
+        Assertions.assertThat(motoFinded.getId()).isEqualTo(motoCreated.getId());
+		Assertions.assertThat(motoFinded.getName()).isEqualTo("Moto Test Name");
+		Assertions.assertThat(motoFinded.getLicensePlate()).isEqualTo("testLicensePlate");
+	}
+
+	@Test //UpdateUser
+    public void test04() throws Exception {
+		Moto motoFinded = motoService.findMotoById(motoCreated.getId());
+		
+		motoFinded.setName("Test Moto Name Update");
+		motoFinded.setBrand("testBrandUpdate");
+        Moto motoUpdeted = motoService.updateMoto(motoFinded.getId(), motoFinded);
        
-		Assertions.assertThat(motoUpdeted.getId()).isEqualTo(32);
-		Assertions.assertThat(motoUpdeted.getName()).isEqualTo("Moto Test Name");
-		Assertions.assertThat(motoUpdeted.getBrand()).isEqualTo("testBrand");
+		Assertions.assertThat(motoUpdeted.getName()).isEqualTo("Test Moto Name Update");
+		Assertions.assertThat(motoUpdeted.getBrand()).isEqualTo("testBrandUpdate");
     }
 	
-	@Test
-    public void testDeleteMoto() throws Exception {
-        String motoDeleted = motoService.deleteMoto(132);
+	@Test //DeleteMoto
+    public void test05() throws Exception {
+        String motoDeleted = motoService.deleteMoto(motoCreated.getId());
        
         Assertions.assertThat(motoDeleted.equals("deleted"));
     }
